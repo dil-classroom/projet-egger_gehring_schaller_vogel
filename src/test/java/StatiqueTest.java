@@ -30,4 +30,6 @@ public class StatiqueTest {
             assertTrue((output.toString().contains("A brand new static site generator.")));
         }
     }
+
+
 }
