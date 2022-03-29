@@ -3,8 +3,8 @@ package commands;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.Callable;
-
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
@@ -16,18 +16,20 @@ public class Clean implements Callable<Integer> {
 
     @Override
     public Integer call() throws IOException {
-        File file = site.toFile();
+        Path path = Paths.get( System.getProperty("user.dir") + site.toString());
+        File file = path.toFile();
         delete(file);
-
         return 0;
     }
 
     private void delete(File file) throws IOException {
         if (file.isDirectory()) {
+            System.out.println("Here");
             File[] entries = file.listFiles();
             if (entries != null) {
                 for (File entry : entries) {
                     delete(entry);
+
                 }
             }
         }
@@ -35,5 +37,4 @@ public class Clean implements Callable<Integer> {
             throw new IOException("Failed to delete " + file);
         }
     }
-
 }
