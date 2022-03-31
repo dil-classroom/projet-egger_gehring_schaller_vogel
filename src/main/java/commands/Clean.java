@@ -22,7 +22,6 @@ public class Clean implements Callable<Integer> {
         return 0;
     }
 
-    // Test commit signé
     private void delete(File file) throws IOException {
         if (file.isDirectory()) {
             System.out.println("Here");
