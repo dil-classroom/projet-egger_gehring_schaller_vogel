@@ -16,15 +16,14 @@ public class Clean implements Callable<Integer> {
 
     @Override
     public Integer call() throws IOException {
-        Path path = Paths.get( System.getProperty("user.dir") + site.toString());
+        Path path = Paths.get( System.getProperty("user.dir") + site.toString() + "//build");
         File file = path.toFile();
-        delete(file);
+        if(file.isDirectory()) delete(file);
         return 0;
     }
 
     private void delete(File file) throws IOException {
         if (file.isDirectory()) {
-            System.out.println("Here");
             File[] entries = file.listFiles();
             if (entries != null) {
                 for (File entry : entries) {
