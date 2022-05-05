@@ -3,7 +3,7 @@ name: "pre-release"
 on:
   push:
     branches:
-      - "main"
+      - "feature-actions"
 
 jobs:
   pre-release:
