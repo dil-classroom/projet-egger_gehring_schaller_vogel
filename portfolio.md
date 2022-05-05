@@ -1,35 +1,46 @@
 # Portfolio - Groupe Egger, Gehring, Schaller, Vogel
 
-## Introduction
+## Introduction 
 
-Ce document contient le portfolio du projet de groupe dans le cadre du cours DIL 2022 de la HEIG-VD. Le projet est commissionné par l'équipe responsable du cours, et ils font donc office de ''client'' et de product owner. 
+### Présentation du contexte
 
-Ce projet a pour but de créer un générateur de site statique. Le programme sera écrit en java et utilisera la librairie handlebars. 
+Ce document contient le portfolio du projet de groupe dans le cadre du cours DIL 2022 de la HEIG-VD. Ce cours a pour but de nous faire découvrire les processus de développement en ingénierie logicielle. Notamment les processus de développement, les processus agiles, les spécifications, la conception et modélisation, la gestion des configurations et les tests, validation et performances des logicielles. C'est donc dans ce contexte que nous allons développer notre projet, qui a pour but de créer un générateur de site statique. Le projet est commissionné par l'équipe responsable du cours, M. Chapuis (Professeur) et M. Santamaria (Assistant) et ensemble ils font donc office de client et de product owner. 
 
+
+### Présentation du projet
+
+Le programme sera écrit en java et utilisera la librairie handlebars. 
+
+Nous avons choisi nos librairie principalement selon les critères selon le nombre de star sur github, mais aussi selon notre compréhension du getting started, ainsi que la date du dernier commit. Car ces élements nous permettent de nous situer par rapport aux différents choix de librairie possible.
+
+// A COMPLETER
+
+// A DEPLACER
 Ce projet met en pratique les méthodologies de gestion de projet vu pendant le cours de DIL notamment le processus agile et aussi les guidelines comme "commit early, commit often" ou encore les tests continues. 
 
 
-## Méthodologie
 
-### Equipe 
+### Présentation de l'équipe 
 
 Nous sommes une équipe composée de 4 personnes : Magali Egger, Mélissa Gehring, Joris Schaller et Maëlle Vogel. Nous avons une bonne synergie, nous entendons très bien et avons l'habitude de travailler ensemble. Notre groupe ne comporte à priori pas de leader, nous avons une hiérarchie horizontale.
 
+Notre team est très complémentaire, nous avons une bonne connaissance des différents langages de programmation. Certain d'entre nous avons déjà une expérience dans le développement de site web. Melissa a déjà suivi un cours d'ingénierie logiciel ce qui nous fournit un avantage. Joris a l'habitude de rechercher des solutions à des problèmes, des librairies déjà existantes, afin de ne pas réinventer la roue. Maëlle est très organisée et nous aide à garder un oeil sur les deadlines. Magali est touche-à-tout et est toujours là pour nous motiver et nous faire rire.
+
+
+### Organisation au sein de l'équipe
+
 Nous avons décidé de partir sur un processus logiciel agile semi-piloté afin d'avoir plus de liberté dans les étapes ultérieures du projet, nous préférons travailler de manière plus maléable.
+
 Nous ne suivons pas exactement un framework existant. Nous participons tous ensemble à au moins une réunion par semaine afin d'organiser et de voir l'avancement du projet et des taches en cours. Lors de ces réunions, nous discutons des taches réalisées, des taches qu'ils restent à accomplir, des taches accomplies et des problèmes encourrus. En début de sprint, nous transformons également les stories utilisateurs en taches.
 
 Nous communiquons régulièrement sur un groupe Telegram, et nous nous réunissons 1 fois par semaine afin de répartir les tâches entre nous. Certaines tâches sont difficilement réalisables par une seule personne, par exemple la rédaction du portfolio ou du README, et nous nous séparons donc en sous-groupes de 2 personnes afin d'être plus efficaces dans la réalisation desdites tâches.
 Lorsqu'une personne a des problèmes pour réaliser sa tache, nous communiquons et nous entraidons afin de palier aux problèmes. 
 
-Notre team est très complémentaire, nous avons une bonne connaissance des différents langages de programmation.
-Certain d'entre nous avons déjà une expérience dans le développement de site web.
-Melissa a déjà suivi un cours d'ingénierie logiciel ce qui nous fournit un avantage.
-Joris a l'habitude de rechercher des solutions à des problèmes, des librairies déjà existantes, afin de ne pas réinventer la roue.
-Maëlle est très organisée et nous aide à garder un oeil sur les deadlines.
-Magali est touche-à-tout et est toujours là pour nous motiver et nous faire rire.
 
 
-### Processus
+## Méthodologie
+
+### Description d'une session 
 
 Le déroulement typique d'une session peut être décrite ainsi :
 
@@ -42,6 +53,8 @@ Le déroulement typique d'une session peut être décrite ainsi :
 * Une fois la tâche terminée et les tests rédigés, une pull request est créée et au moins une review est nécessaire avant de pouvoir merge la branche de la tâche sur la branche principale
 * Après un review positive et la branche mergée, et on peut supprimer la branche et commencer à travailler sur la prochaine tâche
 
+
+### Choix des guidelines techniques
 
 Le nom de branche doit être clair et faire écho à la tâche qu'elle concerne. Nous utilisons en principe le format suivant pour nos branches : feature_XXX pour les features, et bug_XXX pour les bugs.
 
@@ -64,9 +77,16 @@ Nous allons utiliser un système de releases pour déployer notre logiciel.
 
 En principe nous rédigeons toute la documentation en français.
 
+Le format des commits dépend du type de tâche effectuées : 
+
+// A COMPLETER
+
+
 ## Outils
 
-### Kanban automatique (en liant les issues entre elles et en créant les pull requests qui ferment lesdites issues)
+### Kanban automatique 
+
+Le kanban a été automatisé en liant les issues entre elles et en créant les pull requests qui ferment lesdites issues.
 
 Nous avons utilisé un kanban pour organiser nos tâches avec les colonnes suivantes : 
  * Stories utilisateur : les stories utilisateurs sont les user stories qui nous permettent de définir les tâches/issues à réaliser.
@@ -88,28 +108,32 @@ Cette section contient les différents problèmes que nous avons encourus, les s
 | Oublier d'ajouter les estimations de temps      | Ajouter les estimations par après                                      | Etre plus rigoureux lors de l'étape d'assignation des taches                                                    |
 | Push sur main n'était pas bloqué                | Chercher d'ou vient le problème sur StackOverflow                      | Nous devrions vérifier plus assidument nos mesures de sécurités lorsque nous les mettons en place               |
 
+// A COMPLETER
+
+
+## Retour sur le Sprint 1
+
+### Choix technique
+Avant de commencer ce sprint, nous avons évalué nos possibilités pour fournir un outil capable de générer un site statique, l'utilisation d'un moteur de template
+comme [mustache](https://github.com/spullara/mustache.java) a été envisagé, mais après discussion, nous avons trouvé que pandoc répondait mieux aux exigences et était plus
+simple à prendre en main. Pandoc permet de générer des fichiers html à partir d'un fichier md suivant un template précis. Ceci nous a permis de regrouper les 3 premières stories en une seule task, à savoir d'utiliser Pandoc.
+Nous n'avons pas écrit de tests avant de commencer à implémenter les features, nous les avons faits par après pour en vérifier le fonctionnement. Nous envisageons de réaliser des tests avant de commencer à programmer pour les prochains sprints.
+
+### Organisation des issues
+Nous avons aussi remarqué, lors du découpage des stories en issues, que c'était plus compliqué que prévu et que le découpage d'un problème réel en une solution informatique créait des conflits d'organisation. En effet, lors de ce premier sprint les stories étaient simples et nous avons donc eu une seule issue par story, Nous avons donc eu une issue et une user story pour une tâche. Grâce à notre règle de mettre dans la PR close #n, l'issue était fermée mais la story pas forcément.
+Le découpage a été immédiatement fait au début alors que nous aurions pu attendre un peu et le faire de manière incrémentale.
+
+### Gestion du repository
+Nous avons réalisé par erreur que nos mesures de sécurités pour empecher de push sur la branche main sans passer par des pull requests ne fonctionnait pas. Il fallait ajouter cette règle aux administrateurs également, ce que nous n'avions pas fait.
+
+### Continuous Integration Continuous Delivery
 Nous avons décidé de mettre très tôt une cicd github afin d'automatiser les tests et de pouvoir faciliter les reviews.
 Nous avons aussi choisis un style de code(Google) et l'avons rendu obligatoire dans la codebase à l'aide d'un teste du cicd.
 Cependant, afin de ne pas avoir un commit qui formate toute la codebase, nous l'avons configuré de sorte à n'avoir le teste que sur les fichiers différents de 
 la branche main ainsi, une personne peut commit et push (et merge si sa PR répond aux exigences) sans être bloqué par la pipeline cicd à cause de fichiers
 non modifiés qui ne sont pas correctement formaté.
 
-## Sprint 1
-
-Avant de commencer ce sprint, nous avons évalué nos possibilités pour fournir un outil capable de générer un site statique, l'utilisation d'un moteur de template
-comme [mustache](https://github.com/spullara/mustache.java) a été envisagé, mais après discussion, nous avons trouvé que pandoc répondait mieux aux exigences et était plus
-simple à prendre en main. Pandoc permet de générer des fichiers html à partir d'un fichier md suivant un template précis. Ceci nous a permis de regrouper les 3 premières stories en une seule task, à savoir d'utiliser Pandoc.
-
-Nous avons aussi remarqué, lors du découpage des stories en issues, que c'était plus compliqué que prévu et que le découpage d'un problème réel en une solution informatique
-créait des conflits d'organisation. En effet, lors de ce premier sprint les stories étaient simples et nous avons donc eu 1 seule issue par story, Nous avons donc eu 1 issue et 1 user story pour une tâche,
-grâce à notre règle de mettre dans la PR close #n, l'issue était fermée mais la story pas forcément.
-Le découpage a été immédiatement fait au début alors que nous aurions pu attendre un peu et le faire de manière incrémentale, c'est ce que nous ferons les prochaines fois.
-
-Nous avons réalisé par erreur que nos mesures de sécurités pour empecher de push sur la branche main sans passer par des pull requests ne fonctionnait pas. Il fallait ajouter cette règle aux administrateurs également, ce que nous n'avions pas fait.
-
-Nous n'avons pas écrit de tests avant de commencer à implémenter les features, nous les avons faits par après pour en vérifier le fonctionnement. Nous envisageons de réaliser des tests avant de commencer à programmer pour les prochains sprints.
-
-## Sprint 2
+## Retour sur le Sprint 2
 
 ### Etat actuelle du projet
 
