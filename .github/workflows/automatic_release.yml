@@ -3,7 +3,12 @@ name: "pre-release"
 on:
   push:
     branches:
-      - "feature-actions"
+      - main
+      - feature*
+      - fix*
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   pre-release:
@@ -15,7 +20,6 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
+          title: "release du projet"
           files: |
             *.jar
