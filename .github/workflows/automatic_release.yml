@@ -17,4 +17,4 @@ jobs:
           prerelease: false
           title: "release du projet"
           files: |
-            *.jar
+            target/*.jar
