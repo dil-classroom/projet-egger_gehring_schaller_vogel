@@ -74,7 +74,6 @@ public class WatcherTest {
         Thread.sleep(timeToSync);
         // depending on os it might trigger multiple time or not because of the upper level dir
         // beeing registered
-        assertTrue(2 <= l.size(),"2 <= "  +l.size());
-
+        assertTrue(2 <= l.size(), "2 <= " + l.size());
     }
 }
