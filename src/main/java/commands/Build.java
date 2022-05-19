@@ -23,6 +23,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import utils.DirectoryDeleter;
 import utils.ParserContentFile;
+import utils.Watcher;
 
 @Command(name = "build", description = "Build a static site")
 public class Build implements Callable<Integer> {
@@ -33,6 +34,9 @@ public class Build implements Callable<Integer> {
 
     @CommandLine.Parameters(paramLabel = "cheminDuSite", description = "chemin du site")
     public File rootDirectory;
+
+    @CommandLine.Option(names = {"-w", "--watch"})
+    private boolean hotReload = false;
 
     /***
      * This function test  whether the root directory is a directory containing a static site.
@@ -112,6 +116,12 @@ public class Build implements Callable<Integer> {
     @Override
     public Integer call() throws IOException {
         testeDirectoryIsRootSite(rootDirectory);
+        if(hotReload){
+            var w = new Watcher(); //watch only the content folder
+            w.register(this,Path.of(rootDirectory.toString(),contentFolderName));
+            //register only the first time, we don't want to watch again when we are called back
+            hotReload = false;
+        }
 
         File buildDir = Path.of(rootDirectory.getPath(), outputFolderName).toFile();
         if (buildDir.exists() && buildDir.isDirectory()) DirectoryDeleter.delete(buildDir);
