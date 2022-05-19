@@ -7,16 +7,20 @@
 Ce document contient le portfolio du projet de groupe dans le cadre du cours DIL 2022 de la HEIG-VD. Ce cours a pour but de nous faire découvrire les processus de développement en ingénierie logicielle. Notamment les processus de développement, les processus agiles, les spécifications, la conception et modélisation, la gestion des configurations et les tests, validation et performances des logicielles. C'est donc dans ce contexte que nous allons développer notre projet, qui a pour but de créer un générateur de site statique. Le projet est commissionné par l'équipe responsable du cours, M. Chapuis (Professeur) et M. Santamaria (Assistant) et ensemble ils font donc office de client et de product owner. 
 
 
+### Objectif
+
+Ce projet a pour but de mettre en pratique les méthodologies de gestion de projet vu pendant le cours de DIL notamment le processus agile. Ce processus change la dynamique de communication entre le client et l'équipe. En effet, dans les approches agiles, des itérations apparaissent entre les activités. La définition
+des besoins, le design, l’implémentation et les tests s’entremêlent et s’influencent.
+
+Ce projet développe aussi les notions suivante : les guidelines comme "commit early, commit often" ou encore les tests continues. 
+
+// A completer
+
 ### Présentation du projet
 
-Le programme sera écrit en java et utilisera la librairie handlebars. 
+Le programme sera écrit en java. Il inclut plusieurs librairie dont handlebars qui compile des template en fonction JavaScript (templating). Mais également commons-io de apache pour copier des répertoires, snakeyaml pour parser les meta données en yaml et enfin flexmark-all pour transformer le contenu markdown en html. Nous avons choisi nos librairie principalement selon les critères selon le nombre de star sur github, mais aussi selon notre compréhension du getting started, ainsi que la date du dernier commit. Car ces élements nous permettent de nous situer par rapport aux différents choix de librairie possible.
 
-Nous avons choisi nos librairie principalement selon les critères selon le nombre de star sur github, mais aussi selon notre compréhension du getting started, ainsi que la date du dernier commit. Car ces élements nous permettent de nous situer par rapport aux différents choix de librairie possible.
-
-// A COMPLETER
-
-// A DEPLACER
-Ce projet met en pratique les méthodologies de gestion de projet vu pendant le cours de DIL notamment le processus agile et aussi les guidelines comme "commit early, commit often" ou encore les tests continues. 
+Nous avons également utilisé les librairie proposé directement par le client comme JaCoCo qui permet de calculer le degré de couverture du code par des tests unitaires et d’intégration, ou encore sonarQube afin de détecter des bugs et des vulnérabilités.
 
 
 
@@ -75,11 +79,9 @@ Les PR doivent être accompagnée de tests unitaires portant sur les nouvelles f
 
 Nous allons utiliser un système de releases pour déployer notre logiciel.
 
-En principe nous rédigeons toute la documentation en français.
+En principe nous rédigeons toute la documentation en français. 
 
-Le format des commits dépend du type de tâche effectuées : 
-
-// A COMPLETER
+Le format des commits dépend du type de tâche effectuées. Néanmoins nous essayons au tant que possible de garder la forme suivante : verbe suivie suivie de l'action ou d'une précision. Sauf dans les cas évidents, comme par exemple lors de l'ajout de documentation. En prenant un peu de recule sur cette question, et surtout en observant nos commits dans les logs, nous nous sommes rendu compte que nos commit ne sont pas toujours précis et en plus il ne sont pas du tout uniforme. Nous avons donc des progrès à faire sur la nommage de nos commits. Par exemple, avec une structure fixée dès le début, nous aurions pu avoir des commits beaucoup plus clair et beaucoup plus uniforme. 
 
 
 ## Outils
@@ -94,6 +96,10 @@ Nous avons utilisé un kanban pour organiser nos tâches avec les colonnes suiva
  * En cours : les tâches/issues qui sont en cours de réalisation.
  * Terminé : les tâches qui ont une PR qui a été validée et qui ont été merge. Cette colonne est automatiquement mise à jour.
  * Stories réalisées : les stories qui ont été séparées en plusieurs tâches qui ont toutes été validée et merge. Cette colonne n'est pas automatiquement mise à jour, puisque plusieurs taches peuvent etre liées à une story, il est difficile de l'automatiser.
+
+## tableau reliant les stories au issues
+// A COMPLETER
+// Ajouter une analyse de la complexité et du temps 
 
 
 ## Troubleshooting
@@ -147,7 +153,7 @@ Lors de ce sprint, nous avons tenté de mettre en place une méthode de concepti
 Nous n'avons pas beaucoup travaillé avec la notion de décomposition mais avec du recul, nous avons réalisé que nous cela nous aurait aidé de décomposer le projet. Notamment en modélisant les interactions des différents composants. Par exemple à l'aide d'un diagramme de séquence. 
 
 ### Refactoring
-Nous nous en sommes plutôt bien sortie avec l'aspect de refactoring du code. Cela peut être une opération problématique si elle n'est pas faite consciencieusement. Il n'est pas toujours évident de changer un code déjà implementé dans le but de le réutiliser dans un autre projet. Cela nous a demandé de nous y préparer en amont de réflechir à ces questions avant de coder. 
+Nous nous en sommes plutôt bien sortie avec l'aspect de refactoring du code. Cela peut être une opération problématique si elle n'est pas faite consciencieusement. Il n'est pas toujours évident de changer un code déjà implementé dans le but de le réutiliser dans un autre projet. Cela nous a demandé de nous y préparer en amont de réflechir à ces questions avant de coder. Cela a été intéressant de constater que nous n'étions pas tout de suite d'accord sur la façon de procéder. L'outil de refactoring d'intellij nous a été très utile. En effet, il est simple à utiliser et permet d'éviter que le code devienne un véritable champs de bataille, lors de ce processus.
 
 ### Comparaison des temps attendus et actuelles
 
@@ -165,3 +171,25 @@ Les tests devraient être écrit avant la rédaction du code. Une bonne solution
 ### Ce qui doit être continué pendant le prochain sprint
 
 Nous devons encore ajouter la continuous delivery. 
+
+
+
+## Retour sur le Sprint 3
+### Pratiques Agiles
+Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer une diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. 
+En ce qui concerne le refactoring nous avons eu plus de difficulté qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint nous avons eu moins de temps disponible à consacrer à l'avancement du projet. 
+Concernant les tests, nous avons décidé que les pull request ne serait accepté que si elle contienne des tests.
+
+
+
+
+
+ Automatisation
+
+ Commit early, commit often 
+
+action gitub pour relase automatique au moment ou on tag and push. (squash and merge) 
+
+watch service fonctionne (  les commande l'implement pas encore )
+
+diagramme (maybe) 
