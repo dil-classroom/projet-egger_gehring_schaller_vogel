@@ -116,10 +116,10 @@ public class Build implements Callable<Integer> {
     @Override
     public Integer call() throws IOException {
         testeDirectoryIsRootSite(rootDirectory);
-        if(hotReload){
-            var w = new Watcher(); //watch only the content folder
-            w.register(this,Path.of(rootDirectory.toString(),contentFolderName));
-            //register only the first time, we don't want to watch again when we are called back
+        if (hotReload) {
+            var w = new Watcher(); // watch only the content folder
+            w.register(this, Path.of(rootDirectory.toString(), contentFolderName));
+            // register only the first time, we don't want to watch again when we are called back
             hotReload = false;
         }
 
