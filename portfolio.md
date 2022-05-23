@@ -4,7 +4,7 @@
 
 ### Présentation du contexte
 
-Ce document contient le portfolio du projet de groupe dans le cadre du cours DIL 2022 de la HEIG-VD. Ce cours a pour but de nous faire découvrire les processus de développement en ingénierie logicielle. Notamment les processus de développement, les processus agiles, les spécifications, la conception et modélisation, la gestion des configurations et les tests, validation et performances des logicielles. C'est donc dans ce contexte que nous allons développer notre projet, qui a pour but de créer un générateur de site statique. Le projet est commissionné par l'équipe responsable du cours, M. Chapuis (Professeur) et M. Santamaria (Assistant) et ensemble ils font donc office de client et de product owner. 
+Ce document contient le portfolio du projet de groupe dans le cadre du cours DIL 2022 de la HEIG-VD. Ce cours a pour but de nous faire découvrir les processus de développement en ingénierie logicielle. Notamment les processus de développement, les processus agiles, les spécifications, la conception et modélisation, la gestion des configurations et les tests, validation et performances des logiciels. C'est donc dans ce contexte que nous allons développer notre projet, qui a pour but de créer un générateur de site statique. Le projet est commissionné par l'équipe responsable du cours, M. Chapuis (Professeur) et M. Santamaria (Assistant) et ensemble ils font donc office de client et de product owner. 
 
 
 ### Objectif
@@ -12,15 +12,14 @@ Ce document contient le portfolio du projet de groupe dans le cadre du cours DIL
 Ce projet a pour but de mettre en pratique les méthodologies de gestion de projet vu pendant le cours de DIL notamment le processus agile. Ce processus change la dynamique de communication entre le client et l'équipe. En effet, dans les approches agiles, des itérations apparaissent entre les activités. La définition
 des besoins, le design, l’implémentation et les tests s’entremêlent et s’influencent.
 
-Ce projet développe aussi les notions suivante : les guidelines comme "commit early, commit often" ou encore les tests continues. 
+Ce projet développe aussi les notions suivantes : les guidelines comme "commit early, commit often" ou encore les tests continues. 
 
-// A completer
 
 ### Présentation du projet
 
-Le programme sera écrit en java. Il inclut plusieurs librairie dont handlebars qui compile des template en fonction JavaScript (templating). Mais également commons-io de apache pour copier des répertoires, snakeyaml pour parser les meta données en yaml et enfin flexmark-all pour transformer le contenu markdown en html. Nous avons choisi nos librairie principalement selon les critères selon le nombre de star sur github, mais aussi selon notre compréhension du getting started, ainsi que la date du dernier commit. Car ces élements nous permettent de nous situer par rapport aux différents choix de librairie possible.
+Le programme sera écrit en java. Il inclut plusieurs librairies dont handlebars qui compile des template en fonction JavaScript (templating). Mais également commons-io de apache pour copier des répertoires, snakeyaml pour parser les meta données en yaml et enfin flexmark-all pour transformer le contenu markdown en html. Nous avons choisi nos librairies principalement selon les critères selon le nombre de star sur github, mais aussi selon notre compréhension du getting started, ainsi que la date du dernier commit. Car ces éléments nous permettent de nous situer par rapport aux différents choix de librairie possibles.
 
-Nous avons également utilisé les librairie proposé directement par le client comme JaCoCo qui permet de calculer le degré de couverture du code par des tests unitaires et d’intégration, ou encore sonarQube afin de détecter des bugs et des vulnérabilités.
+Nous avons également utilisé les librairies proposé directement par le client comme JaCoCo qui permet de calculer le degré de couverture du code par des tests unitaires et d’intégration, ou encore sonarQube afin de détecter des bugs et des vulnérabilités.
 
 
 
@@ -33,12 +32,12 @@ Notre team est très complémentaire, nous avons une bonne connaissance des diff
 
 ### Organisation au sein de l'équipe
 
-Nous avons décidé de partir sur un processus logiciel agile semi-piloté afin d'avoir plus de liberté dans les étapes ultérieures du projet, nous préférons travailler de manière plus maléable.
+Nous avons décidé de partir sur un processus logiciel agile semi-piloté afin d'avoir plus de liberté dans les étapes ultérieures du projet, nous préférons travailler de manière plus malléable.
 
-Nous ne suivons pas exactement un framework existant. Nous participons tous ensemble à au moins une réunion par semaine afin d'organiser et de voir l'avancement du projet et des taches en cours. Lors de ces réunions, nous discutons des taches réalisées, des taches qu'ils restent à accomplir, des taches accomplies et des problèmes encourrus. En début de sprint, nous transformons également les stories utilisateurs en taches.
+Nous ne suivons pas exactement un framework existant. Nous participons tous ensemble à au moins une réunion par semaine afin d'organiser et de voir l'avancement du projet et des taches en cours. Lors de ces réunions, nous discutons des taches réalisées, des taches qu'ils restent à accomplir, des taches accomplies et des problèmes encourus. En début de sprint, nous transformons également les stories utilisateurs en tâches.
 
 Nous communiquons régulièrement sur un groupe Telegram, et nous nous réunissons 1 fois par semaine afin de répartir les tâches entre nous. Certaines tâches sont difficilement réalisables par une seule personne, par exemple la rédaction du portfolio ou du README, et nous nous séparons donc en sous-groupes de 2 personnes afin d'être plus efficaces dans la réalisation desdites tâches.
-Lorsqu'une personne a des problèmes pour réaliser sa tache, nous communiquons et nous entraidons afin de palier aux problèmes. 
+Lorsqu'une personne a des problèmes pour réaliser sa tâche, nous communiquons et nous nous entraidons afin de palier aux problèmes. 
 
 
 
@@ -95,11 +94,10 @@ Nous avons utilisé un kanban pour organiser nos tâches avec les colonnes suiva
  * Tâches à réaliser : Ce sont les étapes/issues qui résolvent les stories utilisateur(problèmes) qui ne sont pas encore en cours de réalisation ou réalisées. 
  * En cours : les tâches/issues qui sont en cours de réalisation.
  * Terminé : les tâches qui ont une PR qui a été validée et qui ont été merge. Cette colonne est automatiquement mise à jour.
- * Stories réalisées : les stories qui ont été séparées en plusieurs tâches qui ont toutes été validée et merge. Cette colonne n'est pas automatiquement mise à jour, puisque plusieurs taches peuvent etre liées à une story, il est difficile de l'automatiser.
+ * Stories réalisées : les stories qui ont été séparées en plusieurs tâches qui ont toutes été validée et merge. Cette colonne n'est pas automatiquement mise à jour, puisque plusieurs taches peuvent être liées à une story, il est difficile de l'automatiser.
 
 ## tableau reliant les stories au issues
-// A COMPLETER
-// Ajouter une analyse de la complexité et du temps 
+Cette section contiendra un tableau reprenant chaque storie et qui montrera les différentes issues qui y sont liées ainsi que le temps estimé et le temps nécessaire à chaque issue. L'objectif est d'avoir ces résultats regroupés afin de pouvoir faire une analyse plus appronfondie du temps nécessaire aux différentes tâches et le degré de complexité des issues de manière à pouvoir avoir un retour sur les parties qui ont le plus posées problème et celle qui au contraire, ce sont déroulées avec facilité.
 
 
 ## Troubleshooting
@@ -175,21 +173,26 @@ Nous devons encore ajouter la continuous delivery.
 
 
 ## Retour sur le Sprint 3
-### Pratiques Agiles
-Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer une diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. 
+
+### Conception incrémentale
+Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer un diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique, car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. (Il faut encore que nous ajoutions ce diagramme à notre projet).
+
+### Refactoring
 En ce qui concerne le refactoring nous avons eu plus de difficulté qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint nous avons eu moins de temps disponible à consacrer à l'avancement du projet. 
-Concernant les tests, nous avons décidé que les pull request ne serait accepté que si elle contienne des tests.
 
+### Test d'intégration et test système
+Concernant les tests, nous avons établi que les pull request ne seraient acceptées que si elle contiennent des tests. Ce mécanisme permet donc de être sûr que toutes les fonctionnalités soient testées.
 
+### Automatisation
+Nous avons mis en place github Action afin de faire la release automatique au moment où un membre de l'équipe effectue un tag ou un push (squash and merge).
 
-
-
- Automatisation
-
- Commit early, commit often 
-
-action gitub pour relase automatique au moment ou on tag and push. (squash and merge) 
-
-watch service fonctionne (  les commande l'implement pas encore )
-
-diagramme (maybe) 
+### Etat actuel du projet
+Actuellement la watch service fonctionne et les commandes l'ont implémenté. Mais nous n'avons pas pu avancer beaucoup de nos tâches. Cela est dû au manque de temps et à la quantité de travail qui devient de plus en plus importante. 
+Etant donné la situation, nous nous sommes réuni pour discuter des problématiques rencontré lors de ce sprint. Nous avons cerné le fait que ce sprint 3 n'avait pas été mis suffisament en priorité par rapport à d'autres tests et laboratoires et que cela devait changer afin que le travail fournit au sprint 4 puisse être suffisant. Nous allons donc reporter sur le prochain sprint les stories suivantes : 
+- code benchmarking
+- code quality
+- code coverage
+- Javadoc
+- Manuel utilisateur
+- Publication du site dans un répertoire distant
+- Géneration du site statique à la volée
