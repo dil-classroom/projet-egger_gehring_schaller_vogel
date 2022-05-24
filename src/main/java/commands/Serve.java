@@ -10,12 +10,14 @@ import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import utils.Watcher;
 
 @Command(name = "serve", description = "Serve un site statique")
 public class Serve implements Callable<Integer> {
@@ -24,6 +26,9 @@ public class Serve implements Callable<Integer> {
             paramLabel = "rootDirectory",
             description = "root directory of markdown files")
     public File rootDirectory;
+
+    @CommandLine.Option(names = {"-w", "--watch"})
+    private boolean hotReload = false;
 
     @Override
     public Integer call() throws IOException {
@@ -48,7 +53,12 @@ public class Serve implements Callable<Integer> {
             System.err.println("Erreur: le fichier /build/index.html est incorrect ou inexistant");
             return -1;
         }
-
+        if (hotReload) {
+            var w = new Watcher(); // watch only the content folder
+            w.register(this, Path.of(rootDirectory.toString(), "content"));
+            // register only the first time, we don't want to watch again when we are called back
+            hotReload = false;
+        }
         // Lance le serveur
         startServer(4242);
 
