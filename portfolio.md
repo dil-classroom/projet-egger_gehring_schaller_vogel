@@ -177,7 +177,7 @@ Nous devons encore ajouter la continuous delivery.
 ### Conception incrémentale
 Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer un diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique, car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. 
 
-![image](files/Users/jzhang/Desktop/Isolated.png)
+![image](Image/Diagramme_classe.png)
 
 ### Refactoring
 En ce qui concerne le refactoring nous avons eu plus de difficulté qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint nous avons eu moins de temps disponible à consacrer à l'avancement du projet. 
