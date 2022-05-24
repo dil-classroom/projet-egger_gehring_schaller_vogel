@@ -175,24 +175,34 @@ Nous devons encore ajouter la continuous delivery.
 ## Retour sur le Sprint 3
 
 ### Conception incrémentale
-Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer un diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique, car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. (Il faut encore que nous ajoutions ce diagramme à notre projet).
+Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer un diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique, car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. 
+
+![image](files/Users/jzhang/Desktop/Isolated.png)
 
 ### Refactoring
 En ce qui concerne le refactoring nous avons eu plus de difficulté qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint nous avons eu moins de temps disponible à consacrer à l'avancement du projet. 
 
 ### Test d'intégration et test système
 Concernant les tests, nous avons établi que les pull request ne seraient acceptées que si elle contiennent des tests. Ce mécanisme permet donc de être sûr que toutes les fonctionnalités soient testées.
+Nous avons rajouté un test qui effectue plusieurs commande à la suite notamment : init build clean. Ce test fonctionne ce qui montre que les commandes ont un comportement normale. Nous avons aussi implementé un test qui effectue seulement la commande build pour vérifier qu'effectuer cette commande seul ne fonctionne pas. 
 
 ### Automatisation
-Nous avons mis en place github Action afin de faire la release automatique au moment où un membre de l'équipe effectue un tag ou un push (squash and merge).
+Nous avons mis en place github Action afin de faire la release automatique au moment où un membre de l'équipe push un tag (squash and merge). Il liste tout les nouveaux commits depuis la dernière release et il prépare le jar afin de l'ajouter à la release afin d'obtenir le même résultat que lorsque nous faisions les releases à la main. 
 
 ### Etat actuel du projet
-Actuellement la watch service fonctionne et les commandes l'ont implémenté. Mais nous n'avons pas pu avancer beaucoup de nos tâches. Cela est dû au manque de temps et à la quantité de travail qui devient de plus en plus importante. 
-Etant donné la situation, nous nous sommes réuni pour discuter des problématiques rencontré lors de ce sprint. Nous avons cerné le fait que ce sprint 3 n'avait pas été mis suffisament en priorité par rapport à d'autres tests et laboratoires et que cela devait changer afin que le travail fournit au sprint 4 puisse être suffisant. Nous allons donc reporter sur le prochain sprint les stories suivantes : 
+Actuellement la watch service fonctionne et la commandes build l'a implementé. Afin de proposer une interface simple et concise, nous avons imaginé une interface que la classe Watch implémente. L'interface proposée est minimaliste et permet de caché la complexité. Puisque les classes de commandes sont des Callable<Integer>,
+nous avons décidé de proposé une fonction qui prend en paramètre un chemin et un Callable, la méthode call de ce dernier est appelée lorsque un changement est détecté dans le dossier indiquer par le chemin ou un sous répertoire.
+Nous avons rencontré un problème avec le template de pulls request. Il ne s'applique pas comme il le devrait. Nous n'avons donc pas pu utiliser un template de pull request à remplir. Ce qui nous a empêché de faire certaine pulls request. Ce bug a impliqué que nos pulls request n'ont pas toute le même format.
+  
+### A continuer au prochain sprint
+Nous n'avons pas pu avancer beaucoup sur nos tâches. Cela est dû au manque de temps et à la quantité de travail qui devient de plus en plus importante. 
+Etant donné la situation, nous nous sommes réuni pour discuter des problématiques rencontré lors de ce sprint. Nous avons cerné le fait que ce sprint 3 n'avait pas été mis suffisament en priorité par rapport à d'autres tests et laboratoires et que cela devait changer afin que le travail fournit au sprint 4 puisse être suffisant. 
+Nous allons donc reporter sur le prochain sprint les stories suivantes : 
 - code benchmarking
 - code quality
 - code coverage
 - Javadoc
 - Manuel utilisateur
 - Publication du site dans un répertoire distant
-- Géneration du site statique à la volée
+
+Nous aimerions également rajouter dans le cadre de la continous integration continous delivery le fait de pouvoir faire tourner notre programme sur différents OS. Actuellement, nous utilisons uniquement ubuntu. Mais nous aimerions rajouter windows, mac, et d'autres.
