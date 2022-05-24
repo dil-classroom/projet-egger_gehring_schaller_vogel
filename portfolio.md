@@ -80,7 +80,7 @@ Nous allons utiliser un système de releases pour déployer notre logiciel.
 
 En principe nous rédigeons toute la documentation en français. 
 
-Le format des commits dépend du type de tâche effectuées. Néanmoins nous essayons au tant que possible de garder la forme suivante : verbe suivie suivie de l'action ou d'une précision. Sauf dans les cas évidents, comme par exemple lors de l'ajout de documentation. En prenant un peu de recule sur cette question, et surtout en observant nos commits dans les logs, nous nous sommes rendu compte que nos commit ne sont pas toujours précis et en plus il ne sont pas du tout uniforme. Nous avons donc des progrès à faire sur la nommage de nos commits. Par exemple, avec une structure fixée dès le début, nous aurions pu avoir des commits beaucoup plus clair et beaucoup plus uniforme. 
+Le format des commits dépend du type de tâche effectuées. Néanmoins nous essayons au tant que possible de garder la forme suivante : verbe suivie suivie de l'action ou d'une précision. Sauf dans les cas évidents, comme par exemple lors de l'ajout de documentation. En prenant un peu de recule sur cette question, et surtout en observant nos commits dans les logs, nous nous sommes rendu compte que nos commit ne sont pas toujours précis et en plus il ne sont pas du tout uniforme. Nous avons donc des progrès à faire sur le nommage de nos commits. Par exemple, avec une structure fixée dès le début, nous aurions pu avoir des commits beaucoup plus clair et beaucoup plus uniforme. 
 
 
 ## Outils
@@ -97,6 +97,7 @@ Nous avons utilisé un kanban pour organiser nos tâches avec les colonnes suiva
  * Stories réalisées : les stories qui ont été séparées en plusieurs tâches qui ont toutes été validée et merge. Cette colonne n'est pas automatiquement mise à jour, puisque plusieurs taches peuvent être liées à une story, il est difficile de l'automatiser.
 
 ## tableau reliant les stories au issues
+
 Cette section contiendra un tableau reprenant chaque storie et qui montrera les différentes issues qui y sont liées ainsi que le temps estimé et le temps nécessaire à chaque issue. L'objectif est d'avoir ces résultats regroupés afin de pouvoir faire une analyse plus appronfondie du temps nécessaire aux différentes tâches et le degré de complexité des issues de manière à pouvoir avoir un retour sur les parties qui ont le plus posées problème et celle qui au contraire, ce sont déroulées avec facilité.
 
 
@@ -112,30 +113,31 @@ Cette section contient les différents problèmes que nous avons encourus, les s
 | Oublier d'ajouter les estimations de temps      | Ajouter les estimations par après                                      | Etre plus rigoureux lors de l'étape d'assignation des taches                                                    |
 | Push sur main n'était pas bloqué                | Chercher d'ou vient le problème sur StackOverflow                      | Nous devrions vérifier plus assidument nos mesures de sécurités lorsque nous les mettons en place               |
 
-// A COMPLETER
 
 
 ## Retour sur le Sprint 1
 
 ### Choix technique
+
 Avant de commencer ce sprint, nous avons évalué nos possibilités pour fournir un outil capable de générer un site statique, l'utilisation d'un moteur de template
 comme [mustache](https://github.com/spullara/mustache.java) a été envisagé, mais après discussion, nous avons trouvé que pandoc répondait mieux aux exigences et était plus
 simple à prendre en main. Pandoc permet de générer des fichiers html à partir d'un fichier md suivant un template précis. Ceci nous a permis de regrouper les 3 premières stories en une seule task, à savoir d'utiliser Pandoc.
 Nous n'avons pas écrit de tests avant de commencer à implémenter les features, nous les avons faits par après pour en vérifier le fonctionnement. Nous envisageons de réaliser des tests avant de commencer à programmer pour les prochains sprints.
 
 ### Organisation des issues
+
 Nous avons aussi remarqué, lors du découpage des stories en issues, que c'était plus compliqué que prévu et que le découpage d'un problème réel en une solution informatique créait des conflits d'organisation. En effet, lors de ce premier sprint les stories étaient simples et nous avons donc eu une seule issue par story, Nous avons donc eu une issue et une user story pour une tâche. Grâce à notre règle de mettre dans la PR close #n, l'issue était fermée mais la story pas forcément.
 Le découpage a été immédiatement fait au début alors que nous aurions pu attendre un peu et le faire de manière incrémentale.
 
 ### Gestion du repository
+
 Nous avons réalisé par erreur que nos mesures de sécurités pour empecher de push sur la branche main sans passer par des pull requests ne fonctionnait pas. Il fallait ajouter cette règle aux administrateurs également, ce que nous n'avions pas fait.
 
 ### Continuous Integration Continuous Delivery
+
 Nous avons décidé de mettre très tôt une cicd github afin d'automatiser les tests et de pouvoir faciliter les reviews.
 Nous avons aussi choisis un style de code(Google) et l'avons rendu obligatoire dans la codebase à l'aide d'un teste du cicd.
-Cependant, afin de ne pas avoir un commit qui formate toute la codebase, nous l'avons configuré de sorte à n'avoir le teste que sur les fichiers différents de 
-la branche main ainsi, une personne peut commit et push (et merge si sa PR répond aux exigences) sans être bloqué par la pipeline cicd à cause de fichiers
-non modifiés qui ne sont pas correctement formaté.
+Cependant, afin de ne pas avoir un commit qui formate toute la codebase, nous l'avons configuré de sorte à n'avoir le test que sur les fichiers différents de la branche main ainsi, une personne peut commit et push (et merge si sa PR répond aux exigences) sans être bloqué par la pipeline cicd à cause de fichiers non modifiés qui ne sont pas correctement formaté.
 
 ## Retour sur le Sprint 2
 
@@ -147,10 +149,12 @@ La commande build a été mise à jour pour utiliser handelbar et prendre en com
 Hélàs la continuous delivery n'a pas pu être mise en place par manque de temps. De plus, nous n'avons pas pu implementé la commande init, car la personne en charge de cette issue s'est trouvé submergé par d'autres projets (Baleinev) et n'a donc pas pu terminer cet aspect du sprint. Néanmoins, nous avons pu mener à bien ce sprint grâce à l'investissement et le travail accomplie par le groupe 
 
 ### Methode de conception 
+
 Lors de ce sprint, nous avons tenté de mettre en place une méthode de conception, en commençant par brain-stormer sur le projet à l'aide de petites notes et de croquis dans le but d'explorer plusieurs idées, par exemple sur les outils à utiliser ou encore sur l'architecture des dossiers. La plupart des idées émisent ont finalement été abandonnées mais cette méthodes nous a au moins permis de nous mettre d'accord sur certain aspect du projet. 
 Nous n'avons pas beaucoup travaillé avec la notion de décomposition mais avec du recul, nous avons réalisé que nous cela nous aurait aidé de décomposer le projet. Notamment en modélisant les interactions des différents composants. Par exemple à l'aide d'un diagramme de séquence. 
 
 ### Refactoring
+
 Nous nous en sommes plutôt bien sortie avec l'aspect de refactoring du code. Cela peut être une opération problématique si elle n'est pas faite consciencieusement. Il n'est pas toujours évident de changer un code déjà implementé dans le but de le réutiliser dans un autre projet. Cela nous a demandé de nous y préparer en amont de réflechir à ces questions avant de coder. Cela a été intéressant de constater que nous n'étions pas tout de suite d'accord sur la façon de procéder. L'outil de refactoring d'intellij nous a été très utile. En effet, il est simple à utiliser et permet d'éviter que le code devienne un véritable champs de bataille, lors de ce processus.
 
 ### Comparaison des temps attendus et actuelles
@@ -180,21 +184,26 @@ Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémen
 ![image](Image/Diagramme_classe.png)
 
 ### Refactoring
+
 En ce qui concerne le refactoring nous avons eu plus de difficulté qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint nous avons eu moins de temps disponible à consacrer à l'avancement du projet. 
 
 ### Test d'intégration et test système
+
 Concernant les tests, nous avons établi que les pull request ne seraient acceptées que si elle contiennent des tests. Ce mécanisme permet donc de être sûr que toutes les fonctionnalités soient testées.
 Nous avons rajouté un test qui effectue plusieurs commande à la suite notamment : init build clean. Ce test fonctionne ce qui montre que les commandes ont un comportement normale. Nous avons aussi implementé un test qui effectue seulement la commande build pour vérifier qu'effectuer cette commande seul ne fonctionne pas. 
 
 ### Automatisation
-Nous avons mis en place github Action afin de faire la release automatique au moment où un membre de l'équipe push un tag (squash and merge). Il liste tout les nouveaux commits depuis la dernière release et il prépare le jar afin de l'ajouter à la release afin d'obtenir le même résultat que lorsque nous faisions les releases à la main. 
+
+Nous avons mis en place github Action afin de faire la release automatique au moment où un membre de l'équipe push un tag (la pull request a été squash and merge). Il liste tous les nouveaux commits depuis la dernière release et il prépare le jar afin de l'ajouter à la release afin d'obtenir le même résultat que lorsque nous faisions les releases à la main. 
 
 ### Etat actuel du projet
-Actuellement la watch service fonctionne et la commandes build l'a implementé. Afin de proposer une interface simple et concise, nous avons imaginé une interface que la classe Watch implémente. L'interface proposée est minimaliste et permet de caché la complexité. Puisque les classes de commandes sont des Callable<Integer>,
+
+Actuellement la watch service fonctionne et les commandes build et serve l'ont implementée. Afin de proposer une interface simple et concise, nous avons imaginé une interface que la classe Watch implémente. L'interface proposée est minimaliste et permet de caché la complexité. Puisque les classes de commandes sont des Callable<Integer>,
 nous avons décidé de proposé une fonction qui prend en paramètre un chemin et un Callable, la méthode call de ce dernier est appelée lorsque un changement est détecté dans le dossier indiquer par le chemin ou un sous répertoire.
 Nous avons rencontré un problème avec le template de pulls request. Il ne s'applique pas comme il le devrait. Nous n'avons donc pas pu utiliser un template de pull request à remplir. Ce qui nous a empêché de faire certaine pulls request. Ce bug a impliqué que nos pulls request n'ont pas toute le même format.
   
 ### A continuer au prochain sprint
+  
 Nous n'avons pas pu avancer beaucoup sur nos tâches. Cela est dû au manque de temps et à la quantité de travail qui devient de plus en plus importante. 
 Etant donné la situation, nous nous sommes réuni pour discuter des problématiques rencontré lors de ce sprint. Nous avons cerné le fait que ce sprint 3 n'avait pas été mis suffisament en priorité par rapport à d'autres tests et laboratoires et que cela devait changer afin que le travail fournit au sprint 4 puisse être suffisant. 
 Nous allons donc reporter sur le prochain sprint les stories suivantes : 
