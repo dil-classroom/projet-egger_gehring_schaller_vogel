@@ -231,3 +231,38 @@ Nous allons donc reporter sur le prochain sprint les stories suivantes :
 - Publication du site dans un répertoire distant
 
 Nous aimerions également rajouter dans le cadre de la continous integration continous delivery le fait de pouvoir faire tourner notre programme sur différents OS. Actuellement, nous utilisons uniquement ubuntu. Mais nous aimerions rajouter windows, mac, et d'autres.
+
+## Sprint 4
+Durant le sprint 4 nous avons consolités certaines parties du projet.
+### Profiling 
+Nous avons donc, avec un peu de retard, profiler le code. Afin de voir si le programme était scalable nous avons profiler l'execution lors de la construction d'un site de 3, 100 et 10'000 pages.
+![flamgraph3file](Image/flamegraph3.png)
+![flamgraph100file](Image/flamegraph100.png)
+![flamgraph10kfile](Image/flamegraph10k.png)
+Nous pouvons observer que l'execution est similaire pour les trois cas, cependant quatres zones se démarquent sur le flamegraphe durant la compilation du site. Il s'agit des actions essentielles propre à la méthode CreateHtmlFromContentFile.
+Pour rappel: nous avons définis, un fichier de "contenu" comme un fichier dans le dossier content finisssant en .md et contenant une partie de meta-information (en yaml) et un partie de contenu (en markdown).
+La transformation d'un fichier de contenu se fait en 4 étapes visibles sur le graphe.
+ - Le parsing en contenu et meta donnée
+ - Transformation du contenu markdown en html
+ - Compilation du layout en template
+ - Injection du contenu et des metadonnées dans le template
+Voici les un tableau récapitulant les temps pris par chaque étape. en % du temps du parents
+
+
+| # de fichier | parsing en contenu et meta donnée | markdown à html | Compilation du layout en template | Injection  dans le template | temps total |
+|--------------|-----------------------------------|-----------------|-----------------------------------|----------------------------------------------------------|-------------|
+| 3            |                17%                |       47%       |                20%                |                            5%                            | 0.525s      |
+| 100          |                15%                |       42%       |                22%                |                            13%                           | 0.710s      |
+| 10'000       |                10%                |       28%       |                36%                |                            19%                           | 7.225s      |
+
+On peut voir que lorsque le nombre de fichier augmente, la méthode qui converti le markdown à l'html semble se faire optimiser.
+
+On peut aussi noter que la compilation du layout à lieu à chaque fichier, alors que c'est toujours le même layout pour tous les fichiers. En déplacant hors de la fonction la compilation du template, nous pouvons améliorer grandement notre performance.
+Après avoir fait le changement, nous avons re-profiler le code avec 10'000 fichiers.
+Voici la différence entre le premier flamegraph et le second.
+![effet_de_l_optimisation](Image/effetOpti.png)
+
+Nous pouvons voir que une étape entière de la procédure de création d'un fichier de contenu à un fichier html est supprimée et que nous avons un gains de 33% pour la fonction createHtmlFromContentFile.
+
+Pour les prochaines optimisations possibles mais que nous n'allons pour le moment pas implémenter, nous retenons l'application des données au template de layout qui occupe beaucoup de temps. Il se peut que changer de librairie offre une amélioration, nous envisageons aussi de regarder la documentation en détail pour voir s'il y a des conseils en terme de performance.
+
