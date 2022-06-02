@@ -262,7 +262,7 @@ Après avoir fait le changement, nous avons re-profiler le code avec 10'000 fich
 Voici la différence entre le premier flamegraph et le second.
 ![effet_de_l_optimisation](Image/effetOpti.png)
 
-Nous pouvons voir que une étape entière de la procédure de création d'un fichier de contenu à un fichier html est supprimée et que nous avons un gains de 33% pour la fonction createHtmlFromContentFile.
+Nous pouvons voir qu'une étape entière de la procédure de création d'un fichier de contenu à un fichier html est supprimée et que nous avons un gains de 33% pour la méthode createHtmlFromContentFile. Ainsi comme cette méthode était la majorité du temps, nous avons un temps de compilation qui descend à 5.1 s à la place des 7.225 de départ!
 
 Pour les prochaines optimisations possibles mais que nous n'allons pour le moment pas implémenter, nous retenons l'application des données au template de layout qui occupe beaucoup de temps. Il se peut que changer de librairie offre une amélioration, nous envisageons aussi de regarder la documentation en détail pour voir s'il y a des conseils en terme de performance.
 
