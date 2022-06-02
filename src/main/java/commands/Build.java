@@ -31,7 +31,7 @@ public class Build implements Callable<Integer> {
     public static final String outputFolderName = "build";
     public static final String contentFolderName = "content";
 
-    private TemplateLoader loader  = null;
+    private TemplateLoader loader = null;
     private Handlebars handlebars = null;
     private Template template = null;
 
@@ -42,16 +42,17 @@ public class Build implements Callable<Integer> {
     private boolean hotReload = false;
 
     /**
-     * This function is used to init the template loader, because we don't know how to use picocli and add a constructor
-     * it is here and not in the constructor.
+     * This function is used to init the template loader, because we don't know how to use picocli
+     * and add a constructor it is here and not in the constructor.
      */
-    private void init(){
+    private void init() {
         try {
             loader = new FileTemplateLoader(rootDirectory + "/template", ".html");
             handlebars = new Handlebars(loader);
             template = handlebars.compile("layout");
         } catch (IOException ex) {
-            Logger.getLogger(Build.class.getName()).log(Level.SEVERE, "Impossible de trouver le layout", ex);
+            Logger.getLogger(Build.class.getName())
+                    .log(Level.SEVERE, "Impossible de trouver le layout", ex);
         }
     }
 
@@ -81,7 +82,6 @@ public class Build implements Callable<Integer> {
             throw new IllegalArgumentException("Le dossier de sortie est en lecture seule");
         }
     }
-
 
     /**
      * This function generate the html from the markdown content
