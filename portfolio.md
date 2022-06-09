@@ -159,6 +159,8 @@ Ce tableau reliant les tasks avec le temps estimé et le temps nécessaire à ch
 | Implémenter l'option -version en utilisant picocli #26 | 30min | 35min | |
 | Traduire les différents contenus en français #25 | 1h | 45min | Plusieurs personnes ont participé ce qui a réduit le temps. |
 
+Nous pouvons constater que plus le projet avance, plus nous avons été précis dans le calcul de temps nécessaire à chaque tasks. Cela est probablement dû à une meilleure compréhension du projet dans son ensemble ainsi qu'une meilleure gestion des outils. 
+
 ## Retour sur le Sprint 1
 
 ### Choix technique
