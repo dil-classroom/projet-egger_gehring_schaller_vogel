@@ -16,9 +16,20 @@ public class Init implements Callable<Integer> {
     // Chemin vers le template
     private static final Path TEMPLATE_PATH = Paths.get("src/main/resources/index.md");
 
+    /**
+     * Cette variable contient le chemin du site statique, elle est initialité automatiquement par
+     * picocli
+     */
     @Parameters(paramLabel = "PATH", description = "Le chemin qui doit contenir le site")
     public String path;
 
+    /**
+     * cette methode execute l'action principale de la classe, ici le commande init
+     *
+     * @return 0 si tout est en ordre, -1 sinon
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     @Override
     public Integer call() throws URISyntaxException, IOException {
         if (path == null) {

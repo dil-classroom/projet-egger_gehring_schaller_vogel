@@ -9,12 +9,23 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 import utils.DirectoryDeleter;
 
+/** Cette class implémente la commande clean qui supprime le dossier build d'un site static */
 @Command(name = "clean", description = "Clean a static site")
 public class Clean implements Callable<Integer> {
 
+    /**
+     * Cette variable contient le chemin du site statique, elle est initialité automatiquement par
+     * picocli
+     */
     @Parameters(paramLabel = "SITE", description = "The site to build")
     public Path site;
 
+    /**
+     * cette methode execute l'action principale de la classe, ici le commande clean
+     *
+     * @return
+     * @throws IOException
+     */
     @Override
     public Integer call() throws IOException {
         if (site == null) {

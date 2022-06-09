@@ -6,11 +6,19 @@ import java.util.HashMap;
 import org.yaml.snakeyaml.Yaml;
 
 /***
- * This class is used to parse the reader, it split the content at ---
- * then it parse as yaml the first half and keep the rest as a string
- * If there is no --- it will return the whole as the content
+ * Cette class est utilisée pour parser un fichier de contenu, elle sépare le contenu et les métadonée au délimiteur ---
+ * puis elle parse la première partie (avant le séparateur) comme les métadonnées en yaml
+ * S'il n'y a pas de --- le fichier entier est retourné comme contenu,
  */
 public class ParserContentFile {
+    /**
+     * parse parse un fichier de contenu en metadonnées et contenu, les métadonnées sont parsées
+     * comme du yaml puis chaque clé valeur est mise la map retournée
+     *
+     * @param reader le reader ouvert sur un fichier de contenu
+     * @return une HashMap contenu les clés-valeurs des métadonnées ainsi que le contenu stocké à la
+     *     clé "content"
+     */
     public static HashMap<String, Object> parse(BufferedReader reader) {
         if (reader == null) {
             return new HashMap<>();

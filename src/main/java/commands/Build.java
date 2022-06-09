@@ -25,6 +25,11 @@ import utils.DirectoryDeleter;
 import utils.ParserContentFile;
 import utils.Watcher;
 
+/**
+ * Cette classe implémente la commande build qui construit un site statique, la commande serve
+ * s'attend a trouver les fichier de contenu dans content et le résultat de la compilation sera mis
+ * dans build
+ */
 @Command(name = "build", description = "Build a static site")
 public class Build implements Callable<Integer> {
     public static final String templateFolderName = "template";
@@ -35,6 +40,10 @@ public class Build implements Callable<Integer> {
     private Handlebars handlebars = null;
     private Template template = null;
 
+    /**
+     * roorDirectory contient le fichier où se situe le site. Il est initialité automatiquement par
+     * picocli
+     */
     @CommandLine.Parameters(paramLabel = "cheminDuSite", description = "chemin du site")
     public File rootDirectory;
 
@@ -57,8 +66,9 @@ public class Build implements Callable<Integer> {
     }
 
     /***
-     * This function test  whether the root directory is a directory containing a static site.
-     * @param rootDirectoryToTest the directory to test
+     * Cette methode determine si le rootDirectoryToTest est un dossier contenant un site statique initialisé ou non
+     * @param rootDirectoryToTest le repertoire du site statique
+     * @throws NullPointerException,IllegalArgumentException si l'argument est null ou n'est pas un site statique respectivement
      */
     private void testeDirectoryIsRootSite(File rootDirectoryToTest) {
         if (rootDirectoryToTest == null) {
@@ -84,10 +94,10 @@ public class Build implements Callable<Integer> {
     }
 
     /**
-     * This function generate the html from the markdown content
+     * Cette methode génère le du html à partir de contenu markdown
      *
-     * @param markdown the string containing the markdown content
-     * @return the html generated from the markdown content using flexmark
+     * @param markdown Un string contenu le markdown
+     * @return le html résultant de la compilation du markdown avec flexmark
      */
     public static String genHtmlFromMarkdown(String markdown) {
         MutableDataHolder options = new MutableDataSet();
@@ -104,12 +114,11 @@ public class Build implements Callable<Integer> {
     }
 
     /**
-     * This function generate the standalone html result from a content file It use the layout file
-     * to generate the html result
+     * Cette méthode génère le fichier html résultat d'un fichier de contenu. Le fichier de layout
+     * est utilisé pour construire une page html complète
      *
-     * @param contentFile the content file having meta info the '---' separator and the markdown
-     *     content
-     * @return The html result generated from the content file using the layout file
+     * @param contentFile un fichier de contenu ayant le séparateur '---' et le contenu markdown
+     * @return le html correspondant à la compilation du fichier de contenu
      */
     public String createHtmlFromContentFile(@NotNull File contentFile) {
         try {
@@ -128,6 +137,13 @@ public class Build implements Callable<Integer> {
         return null;
     }
 
+    /**
+     * cette methode execute l'action principale de la classe, ici le commande build qui construit
+     * le site statique
+     *
+     * @return 0 si tout est en ordre, -1 sinon
+     * @throws IOException
+     */
     @Override
     public Integer call() throws IOException {
         testeDirectoryIsRootSite(rootDirectory);

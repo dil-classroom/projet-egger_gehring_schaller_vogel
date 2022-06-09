@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Watcher class pour le file system. Elle est utilisé pour notifier un callable lors d'un
+ * Watcher est une class pour le file system. Elle est utilisée pour notifier un callable lors d'un
  * changement d'un repertoire ou de ses sous repertoires.
  */
 public class Watcher implements Subject {
@@ -42,6 +42,14 @@ public class Watcher implements Subject {
                 });
     }
 
+    /**
+     * Cette méthode prend un observer qui souhaite être notifié lorsque directoryToWatch ou un
+     * fichier de ses sous fichiers est modifié
+     *
+     * @param observer le suject sur lequel on appel la method call lorsque un élément de
+     *     directoryToWatch est changé
+     * @param directoryToWatch le repertoire a observer
+     */
     @Override
     public void register(Callable<Integer> observer, Path directoryToWatch) {
         obs = observer;
@@ -99,6 +107,12 @@ public class Watcher implements Subject {
         }
     }
 
+    /**
+     * Cette methode est utilisé pour supprimer un callable a appeler lorsque la directoryToWatch
+     * change
+     *
+     * @param observer le sujet a supprimer
+     */
     @Override
     public void unregister(Callable<Integer> observer) {
         obs = null;
