@@ -96,9 +96,35 @@ Nous avons utilisé un kanban pour organiser nos tâches avec les colonnes suiva
  * Terminé : les tâches qui ont une PR qui a été validée et qui ont été merge. Cette colonne est automatiquement mise à jour.
  * Stories réalisées : les stories qui ont été séparées en plusieurs tâches qui ont toutes été validée et merge. Cette colonne n'est pas automatiquement mise à jour, puisque plusieurs taches peuvent être liées à une story, il est difficile de l'automatiser.
 
-## tableau reliant les stories au issues
+## Recapitulatif des stories et des issues qui y sont reliées
 
-Cette section contiendra un tableau reprenant chaque storie et qui montrera les différentes issues qui y sont liées ainsi que le temps estimé et le temps nécessaire à chaque issue. L'objectif est d'avoir ces résultats regroupés afin de pouvoir faire une analyse plus appronfondie du temps nécessaire aux différentes tâches et le degré de complexité des issues de manière à pouvoir avoir un retour sur les parties qui ont le plus posées problème et celle qui au contraire, ce sont déroulées avec facilité.
+Voici un tableau reprenant chaque storie et qui montre les différentes issues qui y sont liées. Pour chaque storie, nous avons ajouté son état actuel ainsi que d'éventuelles remarques.
+
+| **Stories**                    | **Tasks liées à la storie**              | **Etat Actuel**                           | **Remarques**             |
+|------------------------------|--------------------------------|------------------------------------------|---------------------------|
+| Saisie des données structurées #14| il n'y a pas de task liée à cette storie | Terminé | Pas de code nécessaire pour cette storie |
+| Saisie du contenu #15 | il n'y a pas de task liée à cette storie |Terminé | Pas de code nécessaire pour cette storie. Nous avons choisi de faire du md |
+| Format des pages #16 | il n'y a pas de tasks liée à cette storie |Terminé | Pas de code nécessaire pour cette storie|
+| Affichage de la version #17 | #26 implémenter l'option -version en utilisant picocli |Terminé | |
+| Initialiser un site statique #18|#30 Implémenter la méthode init à l'aide de picocli |Terminé || 
+| Compiler un site statique #19 |#31 Implémenter la méthode build à l'aide de picocli | Terminé | |
+| Nettoyer un site statique #20| #27 Implémenter la méthode clean à l'aide de picocoli | Terminé ||
+| Améliorer l'intégration continue #21 | #29 Faire un merge plus restrictif | Terminé| |
+| Release et documentation #23| #28 Paramétrer la génération de release et gérer la documentation, #34 Création automatique d'une release, #35 Création de la documentation pour l'installation | Terminé ||
+| Server HTTP #60 | #62 Implémenter la commande serve à l'aide de picocli |Terminé||
+| Moteur de template #61  | #66 Faire des recherches, #67 Faire la transition, #68 Modifier la commande init, #69 Modifier la commande build, #70 Factoriser la génération des pages HTML, #74 Feature changement a handlebar pour le build|Terminé||
+| Génération du site statique à la volée #81 | #91 Implémenter l'interface Watch qui permettra l'appel de l'option --watch| Terminé||
+| Code quality #86 | #94 Configurer LGTM pour le code quality |Terminé||
+| Continuous delivery #59 | #63 Déploiement continu à l'aide de github action|Terminé||
+| Publication du site dans un répertoire distant #82| #92 Implémenter la commande publish |Ouverte | |
+| Manuel utilisateur #83 | #88 Mettre à jour le manuel utilisateur | Terminé ||
+| Javadoc #84| #89 Mettre en place la javadoc |Terminé||
+| Code coverage #85| #90 Configurer CodeClimate pour le code coverage| En cours| Devrait normalement être terminé avant la fin du sprint 4|
+
+Grâce à ce tableau, nous réalisons qu'il y a une storie qui n'est pas terminé. Il s'agit de la storie #82 (Publication du site dans un répertoire distant). Cette storie nous paraît complexe et pas forcement utile c'est pourquoi nous avons préféré prioritiser les autres stories. Malheureusement, nous arrivons à la fin du projet et nous réalisons que nous n'avons plus le temps d'accomplir cette demande du client. Si c'était à refaire nous n'aurions pas du repousser le traitement de cette storie aussi longtemps car si elle avait été prise en charge plus tôt nous aurions pu la terminer. 
+
+
+
 
 
 ## Troubleshooting
@@ -116,7 +142,9 @@ Cette section contient les différents problèmes que nous avons encourus, les s
 
 ## Comparaison entre les temps attendus et les temps effectués
 
-| **Tâche**                    | **Temps attendu**              | **Temps réel**                           | **Remarques**             |
+Ce tableau reliant les tasks avec le temps estimé et le temps nécessaire à chaque issue. L'objectif est d'avoir ces résultats regroupés afin de pouvoir faire une analyse plus appronfondie du temps nécessaire aux différentes tâches et le degré de complexité des issues de manière à pouvoir avoir un retour sur les parties qui ont le plus posées problème et celle qui au contraire, ce sont déroulées avec facilité.
+
+| **Task**                    | **Temps attendu**              | **Temps réel**                           | **Remarques**             |
 |------------------------------|--------------------------------|------------------------------------------|---------------------------|
 | Modifier la commande init afin d'intégrer les templates HTML #68 | 1h | 10min | Moins de temps que prévu car la tâche était déjà faite dans build |
 | Faire la transition afin de changer de pandoc vers le moteur de templates choisi #67 | 4h | 9h | Plus de travail que prévu et des bugs a corriger |
