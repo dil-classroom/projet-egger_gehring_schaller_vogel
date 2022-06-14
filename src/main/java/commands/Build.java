@@ -27,7 +27,7 @@ import utils.Watcher;
 
 /**
  * Cette classe implémente la commande build qui construit un site statique, la commande serve
- * s'attend a trouver les fichier de contenu dans content et le résultat de la compilation sera mis
+ * s'attend à trouver les fichiers de contenu dans content et le résultat de la compilation sera mis
  * dans build
  */
 @Command(name = "build", description = "Build a static site")
@@ -41,7 +41,7 @@ public class Build implements Callable<Integer> {
     private Template template = null;
 
     /**
-     * roorDirectory contient le fichier où se situe le site. Il est initialité automatiquement par
+     * roorDirectory contient le fichier où se situe le site. Il est initialisé automatiquement par
      * picocli
      */
     @CommandLine.Parameters(paramLabel = "cheminDuSite", description = "chemin du site")
@@ -51,8 +51,8 @@ public class Build implements Callable<Integer> {
     private boolean hotReload = false;
 
     /**
-     * This function is used to init the template loader, because we don't know how to use picocli
-     * and add a constructor it is here and not in the constructor.
+     * Cette fonction est utilisée pour initialiser un template loader, car on ne sait pas utiliser correctement picoCLI
+     * pour ajouter un constructeur c'est pourquoi cette fonction existe et n'est pas dans un constructeur
      */
     private void init() {
         try {
@@ -66,7 +66,7 @@ public class Build implements Callable<Integer> {
     }
 
     /***
-     * Cette methode determine si le rootDirectoryToTest est un dossier contenant un site statique initialisé ou non
+     * Cette methode détermine si le rootDirectoryToTest est un dossier contenant un site statique initialisé ou non
      * @param rootDirectoryToTest le repertoire du site statique
      * @throws NullPointerException,IllegalArgumentException si l'argument est null ou n'est pas un site statique respectivement
      */
@@ -94,7 +94,7 @@ public class Build implements Callable<Integer> {
     }
 
     /**
-     * Cette methode génère le du html à partir de contenu markdown
+     * Cette methode génère l'html à partir de contenu markdown
      *
      * @param markdown Un string contenu le markdown
      * @return le html résultant de la compilation du markdown avec flexmark
@@ -138,7 +138,7 @@ public class Build implements Callable<Integer> {
     }
 
     /**
-     * cette methode execute l'action principale de la classe, ici le commande build qui construit
+     * cette méthode exécute l'action principale de la classe, ici la commande build qui construit
      * le site statique
      *
      * @return 0 si tout est en ordre, -1 sinon

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import org.yaml.snakeyaml.Yaml;
 
 /***
- * Cette class est utilisée pour parser un fichier de contenu, elle sépare le contenu et les métadonée au délimiteur ---
+ * Cette classe est utilisée pour parser un fichier de contenu, elle sépare le contenu et les métadonnées au délimiteur ---
  * puis elle parse la première partie (avant le séparateur) comme les métadonnées en yaml
  * S'il n'y a pas de --- le fichier entier est retourné comme contenu,
  */
