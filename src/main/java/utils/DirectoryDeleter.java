@@ -4,8 +4,8 @@ import java.io.File;
 import java.nio.file.Files;
 
 /**
- * Cette classe fournie une seule méthode static : delete qui permet de supprimer un dossier
- * ainsi que son contenu
+ * Cette classe fournie une seule méthode static : delete qui permet de supprimer un dossier ainsi
+ * que son contenu
  */
 public class DirectoryDeleter {
     /**

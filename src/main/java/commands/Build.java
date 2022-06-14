@@ -51,8 +51,9 @@ public class Build implements Callable<Integer> {
     private boolean hotReload = false;
 
     /**
-     * Cette fonction est utilisée pour initialiser un template loader, car on ne sait pas utiliser correctement picoCLI
-     * pour ajouter un constructeur c'est pourquoi cette fonction existe et n'est pas dans un constructeur
+     * Cette fonction est utilisée pour initialiser un template loader, car on ne sait pas utiliser
+     * correctement picoCLI pour ajouter un constructeur c'est pourquoi cette fonction existe et
+     * n'est pas dans un constructeur
      */
     private void init() {
         try {
