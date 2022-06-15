@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Serve.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projet-egger_gehring_schaller_vogel</a> &gt; <a href="index.source.html" class="el_package">commands</a> &gt; <span class="el_source">Serve.java</span></div><h1>Serve.java</h1><pre class="source lang-java linenums">package commands;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import utils.Watcher;
+
+@Command(name = &quot;serve&quot;, description = &quot;Serve un site statique&quot;)
+<span class="fc" id="L23">public class Serve implements Callable&lt;Integer&gt; {</span>
+
+    @CommandLine.Parameters(
+            paramLabel = &quot;rootDirectory&quot;,
+            description = &quot;root directory of markdown files&quot;)
+    public File rootDirectory;
+
+<span class="fc" id="L30">    @CommandLine.Option(names = {&quot;-w&quot;, &quot;--watch&quot;})</span>
+    private boolean hotReload = false;
+
+    @Override
+    public Integer call() throws IOException {
+        // Validation du paramètre
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (rootDirectory == null) {</span>
+<span class="fc" id="L37">            throw new NullPointerException(&quot;Le nom de dossier ne peut pas être null&quot;);</span>
+        }
+
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (!rootDirectory.exists()) {</span>
+<span class="fc" id="L41">            System.err.println(&quot;Erreur: dossier inexistant&quot;);</span>
+<span class="fc" id="L42">            return -1;</span>
+        }
+
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (!rootDirectory.isDirectory()) {</span>
+<span class="nc" id="L46">            System.err.println(&quot;Erreur: rootDirectory doit être un dossier&quot;);</span>
+<span class="nc" id="L47">            return -1;</span>
+        }
+
+        // Vérifie que le dossier contient un fichier index.html
+<span class="nc" id="L51">        File indexFile = new File(rootDirectory + &quot;/build/index.html&quot;);</span>
+<span class="nc bnc" id="L52" title="All 4 branches missed.">        if (!indexFile.exists() || !indexFile.isFile()) {</span>
+<span class="nc" id="L53">            System.err.println(&quot;Erreur: le fichier /build/index.html est incorrect ou inexistant&quot;);</span>
+<span class="nc" id="L54">            return -1;</span>
+        }
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (hotReload) {</span>
+<span class="nc" id="L57">            var w = new Watcher(); // watch only the content folder</span>
+<span class="nc" id="L58">            w.register(this, Path.of(rootDirectory.toString(), &quot;content&quot;));</span>
+            // register only the first time, we don't want to watch again when we are called back
+<span class="nc" id="L60">            hotReload = false;</span>
+        }
+        // Lance le serveur
+<span class="nc" id="L63">        startServer(4242);</span>
+
+<span class="nc" id="L65">        return 0;</span>
+    }
+
+    private String readFile(String path, Charset encoding) throws IOException {
+<span class="nc" id="L69">        byte[] encoded = Files.readAllBytes(Paths.get(path));</span>
+<span class="nc" id="L70">        return new String(encoded, encoding);</span>
+    }
+
+    private void startServer(int port) throws IOException {
+<span class="nc" id="L74">        ThreadPoolExecutor threadPoolExecutor =</span>
+<span class="nc" id="L75">                (ThreadPoolExecutor) Executors.newFixedThreadPool(10);</span>
+<span class="nc" id="L76">        HttpServer server = HttpServer.create(new InetSocketAddress(&quot;localhost&quot;, port), 0);</span>
+<span class="nc" id="L77">        server.createContext(&quot;/&quot;, new MyHttpHandler());</span>
+<span class="nc" id="L78">        server.setExecutor(threadPoolExecutor);</span>
+<span class="nc" id="L79">        server.start();</span>
+<span class="nc" id="L80">        System.out.println(&quot;Server started on port &quot; + port);</span>
+<span class="nc" id="L81">    }</span>
+
+<span class="nc" id="L83">    private class MyHttpHandler implements HttpHandler {</span>
+        @Override
+        public void handle(HttpExchange httpExchange) throws IOException {
+<span class="nc" id="L86">            handleResponse(httpExchange);</span>
+<span class="nc" id="L87">        }</span>
+
+        private void handleResponse(HttpExchange httpExchange) throws IOException {
+<span class="nc" id="L90">            OutputStream outputStream = httpExchange.getResponseBody();</span>
+<span class="nc" id="L91">            String htmlResponse =</span>
+<span class="nc" id="L92">                    readFile(rootDirectory + &quot;/build/index.html&quot;, StandardCharsets.UTF_8);</span>
+<span class="nc" id="L93">            httpExchange.sendResponseHeaders(200, htmlResponse.length());</span>
+<span class="nc" id="L94">            outputStream.write(htmlResponse.getBytes());</span>
+<span class="nc" id="L95">            outputStream.flush();</span>
+<span class="nc" id="L96">            outputStream.close();</span>
+<span class="nc" id="L97">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

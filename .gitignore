@@ -1,3 +1,5 @@
 .idea
-target/
+target/*
+!target/site
+!target/jacoco.exec
 .DS_store

@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+projet-egger_gehring_schaller_vogel,default,Statique,14,9,2,0,4,3,2,2,1,2
+projet-egger_gehring_schaller_vogel,utils,ParserContentFile,13,89,4,14,4,25,4,7,1,1
+projet-egger_gehring_schaller_vogel,utils,Watcher.new SimpleFileVisitor() {...},0,35,0,0,0,5,0,2,0,2
+projet-egger_gehring_schaller_vogel,utils,DirectoryDeleter,3,31,1,5,1,7,2,3,1,1
+projet-egger_gehring_schaller_vogel,utils,Watcher,22,113,6,4,9,29,5,5,1,4
+projet-egger_gehring_schaller_vogel,commands,Serve,100,24,9,3,23,7,7,3,2,2
+projet-egger_gehring_schaller_vogel,commands,Build,62,275,8,20,17,54,8,12,0,6
+projet-egger_gehring_schaller_vogel,commands,Version,9,23,0,0,3,6,0,2,0,2
+projet-egger_gehring_schaller_vogel,commands,Init,5,85,1,5,1,17,1,5,0,3
+projet-egger_gehring_schaller_vogel,commands,Serve.MyHttpHandler,37,0,0,0,11,0,3,0,3,0
+projet-egger_gehring_schaller_vogel,commands,Clean,0,35,1,5,0,9,1,4,0,2

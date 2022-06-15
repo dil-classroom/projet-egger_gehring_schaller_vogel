@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Build.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projet-egger_gehring_schaller_vogel</a> &gt; <a href="index.source.html" class="el_package">commands</a> &gt; <span class="el_source">Build.java</span></div><h1>Build.java</h1><pre class="source lang-java linenums">package commands;
+
+import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Template;
+import com.github.jknack.handlebars.io.FileTemplateLoader;
+import com.github.jknack.handlebars.io.TemplateLoader;
+import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jetbrains.annotations.NotNull;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import utils.DirectoryDeleter;
+import utils.ParserContentFile;
+import utils.Watcher;
+
+@Command(name = &quot;build&quot;, description = &quot;Build a static site&quot;)
+<span class="fc" id="L29">public class Build implements Callable&lt;Integer&gt; {</span>
+    public static final String templateFolderName = &quot;template&quot;;
+    public static final String outputFolderName = &quot;build&quot;;
+    public static final String contentFolderName = &quot;content&quot;;
+
+<span class="fc" id="L34">    private TemplateLoader loader = null;</span>
+<span class="fc" id="L35">    private Handlebars handlebars = null;</span>
+<span class="fc" id="L36">    private Template template = null;</span>
+
+    @CommandLine.Parameters(paramLabel = &quot;cheminDuSite&quot;, description = &quot;chemin du site&quot;)
+    public File rootDirectory;
+
+<span class="fc" id="L41">    @CommandLine.Option(names = {&quot;-w&quot;, &quot;--watch&quot;})</span>
+    private boolean hotReload = false;
+
+    /**
+     * This function is used to init the template loader, because we don't know how to use picocli
+     * and add a constructor it is here and not in the constructor.
+     */
+    private void init() {
+        try {
+<span class="fc" id="L50">            loader = new FileTemplateLoader(rootDirectory + &quot;/template&quot;, &quot;.html&quot;);</span>
+<span class="fc" id="L51">            handlebars = new Handlebars(loader);</span>
+<span class="fc" id="L52">            template = handlebars.compile(&quot;layout&quot;);</span>
+<span class="nc" id="L53">        } catch (IOException ex) {</span>
+<span class="nc" id="L54">            Logger.getLogger(Build.class.getName())</span>
+<span class="nc" id="L55">                    .log(Level.SEVERE, &quot;Impossible de trouver le layout&quot;, ex);</span>
+<span class="fc" id="L56">        }</span>
+<span class="fc" id="L57">    }</span>
+
+    /***
+     * This function test  whether the root directory is a directory containing a static site.
+     * @param rootDirectoryToTest the directory to test
+     */
+    private void testeDirectoryIsRootSite(File rootDirectoryToTest) {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (rootDirectoryToTest == null) {</span>
+<span class="fc" id="L65">            throw new NullPointerException(&quot;Le nom de dossier ne peut pas être vide&quot;);</span>
+        }
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">        if (!rootDirectoryToTest.exists() || !rootDirectoryToTest.isDirectory()) {</span>
+<span class="fc" id="L68">            throw new IllegalArgumentException(&quot;Le dossier n'existe pas&quot;);</span>
+        }
+
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (!Path.of(rootDirectoryToTest.toString(), contentFolderName).toFile().exists()) {</span>
+<span class="fc" id="L72">            throw new IllegalArgumentException(</span>
+                    &quot;Ce site n'a pas de contenu ou ce repertoire ne contient pas de site&quot;);
+        }
+
+<span class="fc" id="L76">        if (!Path.of(rootDirectoryToTest.toString(), templateFolderName, &quot;layout.html&quot;)</span>
+<span class="fc" id="L77">                .toFile()</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">                .exists()) {</span>
+<span class="nc" id="L79">            throw new IllegalArgumentException(&quot;Un fichier template/layout.html est nécessaire&quot;);</span>
+        }
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (!Files.isWritable(Path.of(rootDirectoryToTest.toString()))) {</span>
+<span class="nc" id="L82">            throw new IllegalArgumentException(&quot;Le dossier de sortie est en lecture seule&quot;);</span>
+        }
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * This function generate the html from the markdown content
+     *
+     * @param markdown the string containing the markdown content
+     * @return the html generated from the markdown content using flexmark
+     */
+    public static String genHtmlFromMarkdown(String markdown) {
+<span class="fc" id="L93">        MutableDataHolder options = new MutableDataSet();</span>
+<span class="fc" id="L94">        options.set(</span>
+                Parser.EXTENSIONS,
+<span class="fc" id="L96">                Arrays.asList(AutolinkExtension.create(), JekyllTagExtension.create()));</span>
+
+        // change soft break to hard break
+<span class="fc" id="L99">        options.set(HtmlRenderer.SOFT_BREAK, &quot;&lt;br/&gt;&quot;);</span>
+<span class="fc" id="L100">        Parser parser = Parser.builder(options).build();</span>
+<span class="fc" id="L101">        HtmlRenderer renderer = HtmlRenderer.builder(options).build();</span>
+<span class="fc" id="L102">        Document document = parser.parse(markdown);</span>
+<span class="fc" id="L103">        return renderer.render(document);</span>
+    }
+
+    /**
+     * This function generate the standalone html result from a content file It use the layout file
+     * to generate the html result
+     *
+     * @param contentFile the content file having meta info the '---' separator and the markdown
+     *     content
+     * @return The html result generated from the content file using the layout file
+     */
+    public String createHtmlFromContentFile(@NotNull File contentFile) {
+        try {
+<span class="fc" id="L116">            var contentAndMeta =</span>
+<span class="fc" id="L117">                    ParserContentFile.parse(new BufferedReader(new FileReader(contentFile)));</span>
+
+<span class="fc" id="L119">            contentAndMeta.put(</span>
+<span class="fc" id="L120">                    &quot;content&quot;, genHtmlFromMarkdown((String) contentAndMeta.get(&quot;content&quot;)));</span>
+
+<span class="fc" id="L122">            return template.apply(contentAndMeta);</span>
+
+<span class="nc" id="L124">        } catch (IOException e) {</span>
+<span class="nc" id="L125">            e.printStackTrace();</span>
+<span class="nc" id="L126">            System.err.println(&quot;Erreur lors de la création du résultat &quot; + e.getMessage());</span>
+        }
+<span class="nc" id="L128">        return null;</span>
+    }
+
+    @Override
+    public Integer call() throws IOException {
+<span class="fc" id="L133">        testeDirectoryIsRootSite(rootDirectory);</span>
+<span class="fc" id="L134">        init();</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        if (hotReload) {</span>
+<span class="nc" id="L136">            var w = new Watcher(); // watch only the content folder</span>
+<span class="nc" id="L137">            w.register(this, Path.of(rootDirectory.toString(), contentFolderName));</span>
+            // register only the first time, we don't want to watch again when we are called back
+<span class="nc" id="L139">            hotReload = false;</span>
+        }
+
+<span class="fc" id="L142">        File buildDir = Path.of(rootDirectory.getPath(), outputFolderName).toFile();</span>
+<span class="pc bpc" id="L143" title="1 of 4 branches missed.">        if (buildDir.exists() &amp;&amp; buildDir.isDirectory()) DirectoryDeleter.delete(buildDir);</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">        if (!buildDir.mkdir()) {</span>
+<span class="nc" id="L145">            Logger.getAnonymousLogger()</span>
+<span class="nc" id="L146">                    .log(</span>
+                            Level.SEVERE,
+<span class="nc" id="L148">                            &quot;Erreur lors de la création du dossier '&quot; + buildDir.getName() + &quot;'&quot;);</span>
+<span class="nc" id="L149">            return -1;</span>
+        }
+<span class="fc" id="L151">        var contentFolder = new File(rootDirectory + &quot;/&quot; + contentFolderName);</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">        if (!contentFolder.isDirectory()) {</span>
+<span class="nc" id="L153">            throw new NullPointerException(&quot;Le dossier de contenu n'existe pas&quot;);</span>
+        }
+
+<span class="fc bfc" id="L156" title="All 2 branches covered.">        for (File file : Objects.requireNonNull(contentFolder.listFiles())) {</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            if (file.getName().endsWith(&quot;.md&quot;)) {</span>
+<span class="fc" id="L158">                String result = createHtmlFromContentFile(file);</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">                if (result != null) {</span>
+<span class="fc" id="L160">                    File htmlFile =</span>
+                            new File(
+                                    rootDirectory
+                                            + &quot;/&quot;
+                                            + outputFolderName
+                                            + &quot;/&quot;
+<span class="fc" id="L166">                                            + file.getName().replace(&quot;.md&quot;, &quot;.html&quot;));</span>
+<span class="fc" id="L167">                    Files.write(htmlFile.toPath(), result.getBytes());</span>
+                }
+<span class="fc" id="L169">            } else {</span>
+                // copy the file to the build folder using the file name
+<span class="fc" id="L171">                Files.copy(</span>
+<span class="fc" id="L172">                        file.toPath(),</span>
+<span class="fc" id="L173">                        Path.of(buildDir.toString(), file.getName()).toFile().toPath());</span>
+            }
+        }
+
+<span class="fc" id="L177">        return 0;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Watcher.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projet-egger_gehring_schaller_vogel</a> &gt; <a href="index.source.html" class="el_package">utils</a> &gt; <span class="el_source">Watcher.java</span></div><h1>Watcher.java</h1><pre class="source lang-java linenums">package utils;
+
+import static java.nio.file.StandardWatchEventKinds.*;
+
+import interfaces.Subject;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.concurrent.Callable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Watcher class pour le file system. Elle est utilisé pour notifier un callable lors d'un
+ * changement d'un repertoire ou de ses sous repertoires.
+ */
+<span class="fc" id="L17">public class Watcher implements Subject {</span>
+    private Callable&lt;Integer&gt; obs;
+    private Path watchedDir;
+    WatchService watchService;
+
+    /**
+     * Cette methode enregistre un watch service sur un repertoire et tout ses sous repertoires.
+     *
+     * @param path le chemin a observer
+     * @param service le service a utiliser
+     * @throws IOException
+     */
+    private void registerAllDirectoryInPath(Path path, WatchService service) throws IOException {
+<span class="fc" id="L30">        Files.walkFileTree(</span>
+                path,
+<span class="fc" id="L32">                new SimpleFileVisitor&lt;&gt;() {</span>
+                    @Override
+                    public FileVisitResult preVisitDirectory(Path file, BasicFileAttributes attrs)
+                            throws IOException {
+
+<span class="fc" id="L37">                        file.register(service, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);</span>
+<span class="fc" id="L38">                        Logger.getAnonymousLogger()</span>
+<span class="fc" id="L39">                                .log(Level.INFO, &quot;Registered directory : &quot; + file);</span>
+<span class="fc" id="L40">                        return FileVisitResult.CONTINUE;</span>
+                    }
+                });
+<span class="fc" id="L43">    }</span>
+
+    @Override
+    public void register(Callable&lt;Integer&gt; observer, Path directoryToWatch) {
+<span class="fc" id="L47">        obs = observer;</span>
+<span class="fc" id="L48">        watchedDir = directoryToWatch;</span>
+
+        try {
+<span class="fc" id="L51">            watchService = FileSystems.getDefault().newWatchService();</span>
+
+<span class="fc" id="L53">            Logger.getAnonymousLogger()</span>
+<span class="fc" id="L54">                    .log(Level.INFO, &quot;registered root directory : &quot; + watchedDir);</span>
+<span class="fc" id="L55">            watchedDir.register(watchService, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);</span>
+<span class="fc" id="L56">            registerAllDirectoryInPath(watchedDir, watchService);</span>
+
+<span class="fc" id="L58">            new Thread(</span>
+                            () -&gt; {
+                                while (true) {
+                                    try {
+<span class="fc" id="L62">                                        WatchKey key = watchService.take();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                                        for (var event : key.pollEvents()) {</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">                                            if (event.kind() == ENTRY_CREATE) {</span>
+<span class="fc" id="L65">                                                Logger.getAnonymousLogger()</span>
+<span class="fc" id="L66">                                                        .log(</span>
+                                                                Level.INFO,
+                                                                &quot;File or dir &quot;
+<span class="fc" id="L69">                                                                        + event.context()</span>
+                                                                        + &quot; created,&quot;
+                                                                        + &quot; registering...&quot;);
+
+<span class="fc" id="L73">                                                registerAllDirectoryInPath(</span>
+                                                        watchedDir, watchService);
+                                            }
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">                                            if (event.kind() == ENTRY_CREATE</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">                                                    || event.kind() == ENTRY_MODIFY</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                                                    || event.kind() == ENTRY_DELETE) {</span>
+<span class="fc" id="L79">                                                Logger.getAnonymousLogger()</span>
+<span class="fc" id="L80">                                                        .log(</span>
+                                                                Level.INFO,
+                                                                &quot;File &quot;
+<span class="fc" id="L83">                                                                        + event.context()</span>
+                                                                        + &quot; changed&quot;);
+<span class="fc" id="L85">                                                var ret = obs.call();</span>
+                                            }
+<span class="fc" id="L87">                                        }</span>
+                                        // reset the key because without it the next poll won't work
+<span class="fc" id="L89">                                        key.reset();</span>
+<span class="nc" id="L90">                                    } catch (Exception e) {</span>
+<span class="nc" id="L91">                                        e.printStackTrace();</span>
+<span class="pc" id="L92">                                    }</span>
+                                }
+                            })
+<span class="fc" id="L95">                    .start();</span>
+
+<span class="nc" id="L97">        } catch (Exception e) {</span>
+<span class="nc" id="L98">            e.printStackTrace();</span>
+<span class="fc" id="L99">        }</span>
+<span class="fc" id="L100">    }</span>
+
+    @Override
+    public void unregister(Callable&lt;Integer&gt; observer) {
+<span class="nc" id="L104">        obs = null;</span>
+<span class="nc" id="L105">        watchedDir = null;</span>
+<span class="nc" id="L106">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
