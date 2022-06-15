@@ -106,7 +106,7 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.21</version>
+            <version>1.30</version>
         </dependency>
         <!-- This is to solve a warning see : https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder-->
         <dependency>
