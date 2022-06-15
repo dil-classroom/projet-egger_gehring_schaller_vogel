@@ -13,8 +13,6 @@ import picocli.CommandLine.Parameters;
 /** Cette classe est utilisée en conjonction avec picocli pour initialiser un site static. */
 @Command(name = "init", description = "Initialise un dossier pour le site statique")
 public class Init implements Callable<Integer> {
-    // Chemin vers le template
-    private static final Path TEMPLATE_PATH = Paths.get("src/main/resources/index.md");
 
     /**
      * Cette variable contient le chemin du site statique, elle est initialité automatiquement par

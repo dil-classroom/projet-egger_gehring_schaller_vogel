@@ -27,8 +27,8 @@ import utils.Watcher;
 
 /**
  * Cette classe implémente la commande build qui construit un site statique, la commande serve
- * s'attend à trouver les fichiers de contenu dans content et le résultat de la compilation sera mis
- * dans build
+ * s'attend à trouver les fichiers de contenu dans le répertoire content et le résultat de la
+ * compilation sera mis dans le répertoire build
  */
 @Command(name = "build", description = "Build a static site")
 public class Build implements Callable<Integer> {

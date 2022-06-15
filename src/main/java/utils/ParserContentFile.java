@@ -7,17 +7,17 @@ import org.yaml.snakeyaml.Yaml;
 
 /***
  * Cette classe est utilisée pour parser un fichier de contenu, elle sépare le contenu et les métadonnées au délimiteur ---
- * puis elle parse la première partie (avant le séparateur) comme les métadonnées en yaml
- * S'il n'y a pas de --- le fichier entier est retourné comme contenu,
+ * puis elle parse la première partie (avant le séparateur) comme les métadonnées en yaml, et stock le reste du fichier après le délimiteur comme étant le contenu.
+ * S'il n'y a pas de --- le fichier entier est retourné comme contenu.
  */
 public class ParserContentFile {
     /**
-     * parse parse un fichier de contenu en metadonnées et contenu, les métadonnées sont parsées
-     * comme du yaml puis chaque clé valeur est mise la map retournée
+     * parse parse un fichier de contenu en métadonnées et contenu, les métadonnées sont parsées
+     * comme du yaml puis chaque clé valeur est mise la map retournée.
      *
      * @param reader le reader ouvert sur un fichier de contenu
-     * @return une HashMap contenu les clés-valeurs des métadonnées ainsi que le contenu stocké à la
-     *     clé "content"
+     * @return une HashMap contenant les clés-valeurs des métadonnées ainsi que le contenu stocké à
+     *     la clé "content"
      */
     public static HashMap<String, Object> parse(BufferedReader reader) {
         if (reader == null) {
@@ -31,7 +31,7 @@ public class ParserContentFile {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                // skip blanck lines only when parsing yaml
+                // saute les lignes blanches uniquement lorsqu'on parse le yaml
                 if (line.isBlank() && isYaml) continue;
                 if (line.equals("---")) {
                     isYaml = false;
@@ -41,7 +41,7 @@ public class ParserContentFile {
                 }
                 sb.append(line).append("\n");
             }
-            // delete the last \n
+            // supprime le dernier retour à la ligne \n
             if (sb.length() > 0) {
                 sb.deleteCharAt(sb.length() - 1);
             }

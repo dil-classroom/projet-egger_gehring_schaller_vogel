@@ -14,7 +14,7 @@ import utils.DirectoryDeleter;
 public class Clean implements Callable<Integer> {
 
     /**
-     * Cette variable contient le chemin du site statique, elle est initialité automatiquement par
+     * Cette variable contient le chemin du site statique, elle est initialisée automatiquement par
      * picocli
      */
     @Parameters(paramLabel = "SITE", description = "The site to build")

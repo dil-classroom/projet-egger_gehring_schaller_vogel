@@ -21,7 +21,7 @@ import utils.Watcher;
 
 /**
  * Cette classe implémente la commande serve du programme, lorsque la commande est lancée, un
- * serveur http et lancé et le site static est généré
+ * serveur http et lancé et le site statique est généré
  */
 @Command(name = "serve", description = "Serve un site statique")
 public class Serve implements Callable<Integer> {
@@ -31,14 +31,14 @@ public class Serve implements Callable<Integer> {
      */
     @CommandLine.Parameters(
             paramLabel = "rootDirectory",
-            description = "root directory of markdown files")
+            description = "répertoire racine root des fichier markdown")
     public File rootDirectory;
 
     @CommandLine.Option(names = {"-w", "--watch"})
     private boolean hotReload = false;
 
     /**
-     * cette methode execute l'action principale de la classe, ici le commande serve
+     * cette méthode exécute l'action principale de la classe, ici la commande serve
      *
      * @return 0 si tout est en ordre, -1 sinon
      * @throws IOException
