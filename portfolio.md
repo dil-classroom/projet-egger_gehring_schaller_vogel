@@ -247,9 +247,9 @@ Nous devons encore ajouter la continuous delivery.
 ### Conception incrémentale
 Lors de ce sprint, nous avons pu intégrer des méthodes de conception incrémentale notamment grâce à l'utilisation du diagramme de classe. Nous avons fait le choix d'utiliser l'outil d'intellij qui permet de générer un diagramme automatiquement à partir du code. Nous avons trouvé cette solution pratique, car elle est très rapide à mettre en place et permet de bien visualiser l'organisation et l'architecture du code. 
 
-TODO expliquer le diagramme de classe, faire d'autres schémas ?
-
 ![image](Image/Diagramme_classe.png)
+
+Sur ce diagramme, nous pouvons observer que les classes les plus importantes sont vers le bas. Les classes du haut sont principalement les classes de tests, qui nous intéressent moins. La classe DirectoryDeleter permet de supprimer un dossier / fichier. La classe ParserContentFile est une classe utilitaire qui permet de parser des fichiers. Les classes Version, Init, Build, Clean et Serve sont des classes implémentant l'interface Callable et qui implémentent les commandes correspondantes. Serve possède également une classe interne MyHttpHandler afin de lancer le server local. Finalement, l'interface Subject, et Watcher qui l'implémente, permettent de notifier un callable lorsque le sujet change.
 
 ### Refactoring
 
@@ -351,7 +351,9 @@ Durant ce sprint, nous avons également mis en place de la Javadoc afin d'avoir 
 
 ### Use case
 
-TODO schéma ?
+Nous avons fait un use case diagram pour l'utilisation de notre application. L'utilisateur peut appeler plusieurs commandes et modifier, ajouter, supprimer des fichiers et des dossiers.
+
+![Use case](Image/usecase.png)
 
 ### TDD
 
