@@ -30,13 +30,31 @@ public class Build implements Callable<Integer> {
     public static final String templateFolderName = "template";
     public static final String outputFolderName = "build";
     public static final String contentFolderName = "content";
-    private final String layoutFileName = "layout.html";
+
+    private TemplateLoader loader = null;
+    private Handlebars handlebars = null;
+    private Template template = null;
 
     @CommandLine.Parameters(paramLabel = "cheminDuSite", description = "chemin du site")
     public File rootDirectory;
 
     @CommandLine.Option(names = {"-w", "--watch"})
     private boolean hotReload = false;
+
+    /**
+     * This function is used to init the template loader, because we don't know how to use picocli
+     * and add a constructor it is here and not in the constructor.
+     */
+    private void init() {
+        try {
+            loader = new FileTemplateLoader(rootDirectory + "/template", ".html");
+            handlebars = new Handlebars(loader);
+            template = handlebars.compile("layout");
+        } catch (IOException ex) {
+            Logger.getLogger(Build.class.getName())
+                    .log(Level.SEVERE, "Impossible de trouver le layout", ex);
+        }
+    }
 
     /***
      * This function test  whether the root directory is a directory containing a static site.
@@ -101,9 +119,6 @@ public class Build implements Callable<Integer> {
             contentAndMeta.put(
                     "content", genHtmlFromMarkdown((String) contentAndMeta.get("content")));
 
-            TemplateLoader loader = new FileTemplateLoader(rootDirectory + "/template", ".html");
-            Handlebars handlebars = new Handlebars(loader);
-            Template template = handlebars.compile("layout");
             return template.apply(contentAndMeta);
 
         } catch (IOException e) {
@@ -116,6 +131,7 @@ public class Build implements Callable<Integer> {
     @Override
     public Integer call() throws IOException {
         testeDirectoryIsRootSite(rootDirectory);
+        init();
         if (hotReload) {
             var w = new Watcher(); // watch only the content folder
             w.register(this, Path.of(rootDirectory.toString(), contentFolderName));

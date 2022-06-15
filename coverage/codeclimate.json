@@ -1,0 +1,154 @@
+{
+  "ci_service": {
+    "branch": "feature_jacoco",
+    "build_identifier": "",
+    "build_url": "",
+    "commit_sha": "e6118adc91f79d5c75ad26feb38c0d164b6121f5",
+    "committed_at": 1654176097,
+    "name": ""
+  },
+  "environment": {
+    "gem_version": "3.2.5",
+    "package_version": "",
+    "pwd": "/home/mel/Documents/HEIG-VD/DIL/projet-egger_gehring_schaller_vogel",
+    "prefix": "/home/mel/Documents/HEIG-VD/DIL/projet-egger_gehring_schaller_vogel",
+    "rails_root": "",
+    "reporter_version": "0.10.3",
+    "simplecov_root": ""
+  },
+  "git": {
+    "branch": "feature_jacoco",
+    "head": "e6118adc91f79d5c75ad26feb38c0d164b6121f5",
+    "committed_at": 1654176097
+  },
+  "covered_percent": 69.16299559471366,
+  "covered_strength": 0,
+  "line_counts": {
+    "missed": 70,
+    "covered": 157,
+    "total": 227
+  },
+  "source_files": [
+    {
+      "blob_id": "d47fcc6341ad89e95076f478d64d9b8722d387c4",
+      "coverage": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,null,null,null,null,null,null,null,null,null,null,null,null,8,null,9,null,null,null,null,19,4,1,2,null,null,1,null,null,null,3,3,null,null,4,null,5,1,20,6,null,5,null,null,null,4,11,4,3,1,null,null,2,null,null,null,6,null,null,4,0,0,3,1,null,null,2,null,5,null,1,null,3,0,0,1,null,null,1,null,0,0,1,1,null,null,null,0,0,0]",
+      "covered_percent": 79.06976744186046,
+      "covered_strength": 3.441860465116279,
+      "line_counts": {
+        "missed": 9,
+        "covered": 34,
+        "total": 43
+      },
+      "name": "src/main/java/utils/Watcher.java"
+    },
+    {
+      "blob_id": "6e5bcf393b01adbe46383dc36f97bd710719a5ce",
+      "coverage": "[null,null,null,null,null,null,null,null,null,null,null,null,0,null,2,0,null,4,2,2,2,null,null,null,5,null,3,4,2,3,6,1,null,7,null,null,3,7,null,0,0,1,3,4,2,10,2,3,null,null,4,5,null,2]",
+      "covered_percent": 86.20689655172413,
+      "covered_strength": 3.0689655172413794,
+      "line_counts": {
+        "missed": 4,
+        "covered": 25,
+        "total": 29
+      },
+      "name": "src/main/java/utils/ParserContentFile.java"
+    },
+    {
+      "blob_id": "283bd61f6c56285f22f3864918d9b7ec883f6ee0",
+      "coverage": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,null,6,null,null,null,null,null,null,3,5,null,5,2,0,null,17,6,null,10,null,3,null,null,7,8,1,2,3,1,3]",
+      "covered_percent": 94.44444444444444,
+      "covered_strength": 4.722222222222222,
+      "line_counts": {
+        "missed": 1,
+        "covered": 17,
+        "total": 18
+      },
+      "name": "src/main/java/commands/Init.java"
+    },
+    {
+      "blob_id": "bbe34763b15fc7147a633f6b8985d04693e24fd7",
+      "coverage": "[null,null,null,null,null,null,null,null,null,null,null,null,3,null,null,null,null,null,null,3,5,null,7,3,null,6,3,null,null,2,3]",
+      "covered_percent": 100,
+      "covered_strength": 3.888888888888889,
+      "line_counts": {
+        "missed": 0,
+        "covered": 9,
+        "total": 9
+      },
+      "name": "src/main/java/commands/Clean.java"
+    },
+    {
+      "blob_id": "7cf550d0b8062275b36515736379450705ae3897",
+      "coverage": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,null,null,null,4,null,null,null,null,null,3,5,null,null,4,3,3,null,null,0,0,0,null,null,null,0,0,0,0,null,0,0,0,null,0,null,null,0,null,0,null,null,null,0,0,null,null,null,0,0,0,0,0,0,0,0,null,0,null,null,0,0,null,null,0,0,0,0,0,0,0,0]",
+      "covered_percent": 17.073170731707318,
+      "covered_strength": 0.5853658536585366,
+      "line_counts": {
+        "missed": 34,
+        "covered": 7,
+        "total": 41
+      },
+      "name": "src/main/java/commands/Serve.java"
+    },
+    {
+      "blob_id": "c0dc796fcc36a141a93e79ead98c49bce3966ff4",
+      "coverage": "[null,null,null,null,null,null,null,null,null,3,null,0,0,0,null,0,null,null,null,3,3]",
+      "covered_percent": 42.857142857142854,
+      "covered_strength": 1.2857142857142858,
+      "line_counts": {
+        "missed": 4,
+        "covered": 3,
+        "total": 7
+      },
+      "name": "src/main/java/Statique.java"
+    },
+    {
+      "blob_id": "27ea13b0002a68994446597299d5c8c197b22910",
+      "coverage": "[]",
+      "covered_percent": 0,
+      "covered_strength": 0,
+      "line_counts": {
+        "missed": 0,
+        "covered": 0,
+        "total": 0
+      },
+      "name": "src/main/java/interfaces/Subject.java"
+    },
+    {
+      "blob_id": "683036e2336dada57480d0a36606988688f79e63",
+      "coverage": "[null,null,null,null,null,0,null,3,2,16,4,2,null,null,null,3,1]",
+      "covered_percent": 87.5,
+      "covered_strength": 3.875,
+      "line_counts": {
+        "missed": 1,
+        "covered": 7,
+        "total": 8
+      },
+      "name": "src/main/java/utils/DirectoryDeleter.java"
+    },
+    {
+      "blob_id": "df137676b42032a76c90d00e2230d45825f159cd",
+      "coverage": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,3,null,null,null,null,4,null,null,null,null,null,null,null,2,5,null,6,5,null,null,12,5,null,null,null,13,1,2,0,null,7,0,null,1,null,null,null,null,null,null,null,null,4,8,null,7,null,null,5,4,4,4,4,null,null,null,null,null,null,null,null,null,null,null,null,7,2,null,6,3,null,8,5,4,4,null,0,0,0,null,0,null,null,null,null,4,3,0,0,null,0,null,null,12,8,3,0,0,null,0,0,null,7,3,0,null,null,19,5,4,2,5,null,null,null,null,null,7,8,null,1,null,3,2,13,null,null,null,3]",
+      "covered_percent": 77.77777777777779,
+      "covered_strength": 4.111111111111111,
+      "line_counts": {
+        "missed": 14,
+        "covered": 49,
+        "total": 63
+      },
+      "name": "src/main/java/commands/Build.java"
+    },
+    {
+      "blob_id": "bbeb16b0acb6066f7c605b7274b0780de61f9b04",
+      "coverage": "[null,null,null,null,null,null,null,null,3,null,null,null,null,4,null,6,null,6,0,0,0,1,3]",
+      "covered_percent": 66.66666666666666,
+      "covered_strength": 2.5555555555555554,
+      "line_counts": {
+        "missed": 3,
+        "covered": 6,
+        "total": 9
+      },
+      "name": "src/main/java/commands/Version.java"
+    }
+  ],
+  "repo_token": ""
+}

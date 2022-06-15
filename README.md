@@ -1,3 +1,7 @@
+[![Build](https://github.com/dil-classroom/projet-egger_gehring_schaller_vogel/actions/workflows/maven.yml/badge.svg)](https://github.com/softwaremill/maven-badges/actions/workflows/ci.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/720cf7b88325d952ea25/maintainability)](https://codeclimate.com/github/dil-classroom/projet-egger_gehring_schaller_vogel/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/720cf7b88325d952ea25/test_coverage)](https://codeclimate.com/github/dil-classroom/projet-egger_gehring_schaller_vogel/test_coverage)
+
 #### Date : 3 mars 2022
 
 #### Membre du groupe : Maëlle Vogel, Mélissa Gehring, Joris Schaller, Magali Egger 
