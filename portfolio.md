@@ -36,7 +36,7 @@ Notre team est très complémentaire, nous avons une bonne connaissance des diff
 
 Nous avons décidé de partir sur un processus logiciel agile semi-piloté afin d'avoir plus de liberté dans les étapes ultérieures du projet, nous préférons travailler de manière plus malléable.
 
-Nous ne suivons pas exactement un framework existant. Nous participons tous ensemble à au moins une réunion par semaine afin d'organiser et de voir l'avancement du projet et des taches en cours. Lors de ces réunions, nous discutons des taches réalisées, des taches qu'ils restent à accomplir, des taches accomplies et des problèmes encourus. En début de sprint, nous transformons également les stories utilisateurs en tâches.
+Nous ne suivons pas exactement un framework existant. Nous participons tous ensemble à au moins une réunion par semaine afin d'organiser et de voir l'avancement du projet et des taches en cours. Lors de ces réunions, nous discutons des taches réalisées, des taches qu'il reste à accomplir, des taches accomplies et des problèmes encourus. En début de sprint, nous transformons également les stories utilisateurs en tâches.
 
 Nous communiquons régulièrement sur un groupe Telegram, et nous nous réunissons 1 fois par semaine afin de répartir les tâches entre nous. Certaines tâches sont difficilement réalisables par une seule personne, par exemple la rédaction du portfolio ou du README, et nous nous séparons donc en sous-groupes de 2 personnes afin d'être plus efficaces dans la réalisation desdites tâches.
 Lorsqu'une personne a des problèmes pour réaliser sa tâche, nous communiquons et nous nous entraidons afin de palier aux problèmes. 
@@ -133,7 +133,7 @@ Voici un tableau reprenant chaque story et qui montre les différentes issues qu
 
 Grâce à ce tableau, nous réalisons qu'il y a une story qui n'est pas terminée. Il s'agit de la story #82 (Publication du site dans un répertoire distant). Cette story nous paraît complexe et pas forcément utile, c'est pourquoi nous avons préféré prioriser les autres stories. Malheureusement, nous arrivons à la fin du projet et nous réalisons que nous n'avons plus le temps d'accomplir cette demande du client. Si c'était à refaire nous n'aurions pas dû repousser le traitement de cette story aussi longtemps, car si elle avait été prise en charge plus tôt nous aurions pu la terminer. Nous avons été pris de cours par les autres cours, les tests de fins de semestre et la charge de travail générale, ce qui explique notre incapacité à terminer l'entièreté du cahier de charge. 
 
-En termes de complexité, on remarque en observant le tableau que nous avons jugé la plupart des stories nous semblaient suffisamment simples pour etre réalisées en une seule tache. Pour la story #23, nous avons jugé pertinent de la séparer en 2 taches, une pour la documentation et une pour la release automatique. Pour la story #61, cette story était de loin la plus complexe de tout le projet. Nous l'avons séparée en 6 taches afin de pouvoir travailler en petites étapes. 
+En termes de complexité, on remarque en observant le tableau que la plupart des stories nous semblaient suffisamment simples pour etre réalisées en une seule tache. Pour la story #23, nous avons jugé pertinent de la séparer en 2 taches, une pour la documentation et une pour la release automatique. Pour la story #61, cette story était de loin la plus complexe de tout le projet. Nous l'avons séparée en 6 taches afin de pouvoir travailler en petites étapes. 
 
 ## Troubleshooting
 
@@ -253,11 +253,11 @@ Sur ce diagramme, nous pouvons observer que les classes les plus importantes son
 
 ### Refactoring
 
-En ce qui concerne le refactoring nous avons eu plus de difficulté qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint, nous avons eu moins de temps disponible à consacrer à l'avancement du projet du aux autres cours et à l'approche de la fin du semestre. 
+En ce qui concerne le refactoring nous avons eu plus de difficultés qu'au sprint 2. En effet, le refactoring est un processus long à mettre en place, et lors de ce sprint, nous avons eu moins de temps disponible à consacrer à l'avancement du projet dû aux autres cours et à l'approche de la fin du semestre. 
 
 ### Tests d'intégration et tests systèmes
 
-Concernant les tests, nous avons établi que les pull request ne seraient acceptées que si elles contiennent des tests. Ce mécanisme permet donc d'être sûr que toutes les fonctionnalités soient testées.
+Concernant les tests, nous avons établi que les pull requests ne sont acceptées que si elles contiennent des tests. Ce mécanisme permet donc d'être sûr que toutes les fonctionnalités soient testées.
 Nous avons rajouté un test qui effectue plusieurs commandes à la suite notamment : init build clean. Ce test fonctionne ce qui montre que les commandes ont un comportement normal. Nous avons aussi implementé un test qui effectue seulement la commande build pour vérifier qu'effectuer cette commande seule ne fonctionne pas. 
 
 ### Automatisation
@@ -269,7 +269,7 @@ Nous avons également mis en place un template pour les issues.
 
 Actuellement le watch service fonctionne et les commandes build et serve l'ont implémenté. Afin de proposer une interface simple et concise, nous avons imaginé une interface que la classe Watch implémente. L'interface proposée est minimaliste et permet de cacher la complexité. Puisque les classes de commandes sont des Callable<Integer>,
 nous avons décidé de proposer une fonction qui prend en paramètre un chemin et un Callable, la méthode call de ce dernier est appelée lorsqu'un changement est détecté dans le dossier indiqué par le chemin ou un sous répertoire.
-Nous avons rencontré un problème avec le template de pulls request. Il ne s'applique pas comme il le devrait. Nous n'avons donc pas pu utiliser un template de pull request à remplir. Ce qui nous a empêché de faire certaines pulls request. Ce bug a impliqué que nos pulls request n'ont pas toutes le même format.
+Nous avons rencontré un problème avec le template de pull requests. Il ne s'applique pas comme il le devrait. Nous n'avons donc pas pu utiliser un template de pull request à remplir. Ce qui nous a empêché de faire certaines pull requests. Ce bug a impliqué que nos pull requests n'ont pas toutes le même format.
   
 ### À continuer au prochain sprint
   
@@ -343,7 +343,7 @@ Dans le package default, on voit que la classe Statique est testée à 39%, ce q
 
 ### Code quality
 
-En ce qui concerne la qualité du code, nous avons configuré Codeclimate afin d'obtenir un feedback. Nous avons également ajouté dans le README des badges qui indiquent si le build maven passe, et la note que CodeClimate attribue à notre projet. Nous obtenons la note B, car il y a quelques code smells présents dans notre code qui pourraient etre supprimés.
+En ce qui concerne la qualité du code, nous avons configuré Codeclimate afin d'obtenir un feedback. Nous avons également ajouté dans le README des badges qui indiquent si le build maven passe, et la note que CodeClimate attribue à notre projet. Nous obtenons la note C, car il y a plusieurs code smells présents dans notre code qui pourraient etre supprimés, mais que nous n'avons malheureusement pas eu le temps de gérer avant la fin du projet.
 
 ### Javadoc
 
