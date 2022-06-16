@@ -51,7 +51,11 @@ Vous devriez voir l'aide du programme affiché sur votre écran comme ci-dessous
     serve     Serve a static site
     -version  Prints the version of the program
 
-
+## Information sur les notations
+Au moins une commande est attendue, sinon l'aide des différentes commandes disponibles est affichée. Vous verrez des fois après une commande `[--option]`
+les crochets désignent une option ajoutable à la commande, mais qui n'est pas obligatoire.  
+Les arguments sont obligatoires et suffixe une commande.
+Si une commande attend un argument et une option, l'option est entre la command et l'argument, la commande résultante a cette forme : `Statique command [--option] argument` 
 ## Exemple d'utilisation
 Nous supposons désormais que vous avez suivis l'étape Instalation et lancement et que vous êtes dans le dossier Statique.
 Si ce n'est pas le cas faites 
@@ -65,7 +69,7 @@ cd Statique
 Cette commande affiche la version du programme et ne prend pas d'argument.
 ### Commande init
 
-    java -cp "lib/*" Statique -init mon/site/
+    java -cp "lib/*" Statique init mon/site/
 Cette commande initialise un site statique dans le dossier `mon/site/`.
 L'arborescence du site sera la suivante :
 
@@ -84,11 +88,12 @@ Le chemin doit être valide, mais les dossiers parents ne doivent pas forcément
 Le dossier final ne doit pas exister au préalable, une erreur est affichée si c'est le cas.
 
 ### Commande build:  
-Pour build un site situé dans `mon/site/` avec deux fichiers `index.md` et `about.md` dans le dossier `content`
-un site initialisé implique que le dossier `template` ainsi que le fichier `template/layout.html` soit présent.
+Cette commande build un site statique désigné par l'argument de la commande 
+Soit un site statique dans `mon/site/` avec deux fichiers `index.md` et `about.md` dans le dossier `content`
+et un dossier `template` ainsi que le fichier `template/layout.html` présent.
 il suffit de faire :
 
-    java -cp "lib/*" Statique build mon/site/
+    java -cp "lib/*" Statique build [-w,--watch] mon/site/
 Et l'arborescence résultante est la suivante :
    
     mon/Site/
@@ -104,17 +109,60 @@ Et l'arborescence résultante est la suivante :
                       | - layout.html
 
 Cette commande crée donc un dossier `build` dans le dossier `mon/site/` et y met la version html de tous les fichiers *.md du dossier `mon/site/content`.  
-Le contenu des fichiers md est transformé en html puis l'html et les metadonnées sont injecté dans le layout.
+Le contenu des fichiers md est transformé en HTML puis l'HTML et les métadonnées sont injecté dans le layout.
 On peut insérer les fichiers header et footer en utilisant la syntaxe suivante `{{>header}}` et `{{>footer}}` dans le layout.
-Vous pouvez inclure de cette manière n'importe quel fichier html dans le layout, il suffit qu'il soit cans le dossier template 
-et de l'inclure en utilisant son nom sans l'extension comme dans l'exemple ci-dessus.
+En faite, on peut insérer n'importe quel fichier html en utilisant cette syntaxe. Statique recherche uniquement les fichiers dans le dossier template,
+lors de l'include, le nom du fichier doit être écrit dans les {{}} sans l'extension comme dans l'exemple ci-dessus.
+
 **Argument** : un chemin vers un répertoire avec un site statique initialisé.
+**Option watch** cette option peut être appelée avec la version courte ou longue : -w et --watch respectivement, le comportement est identique.
+Cette option va faire en sorte de relancer un build à chaque fois qu'un fichier dans le répertoire désigné par l'argument est modifié / ajouté.
+
+### Commande serve
+
+        java -cp "lib/*" Statique serve [-w,--watch] mon/site/
+
+Cette commande lance un serveur http et permet de visualiser le site dans un navigateur web.
+Vous pouvez vous connecter sur localhost:4242 et voir votre chef d'oeuvre.
+**Argument** : un chemin vers un répertoire avec un dossier `build` contenant un fichier index.html
+**Option watch** : cette option peut être appelée avec la version courte ou longue : -w et --watch respectivement, le comportement est identique.
+Cette option va faire en sorte de relancer un build à chaque fois qu'un fichier dans le répertoire désigné par l'argument est modifié / ajouté.
+
+
 
 ### Commande clean: 
     java -cp "lib/*" Statique clean mon/site/  
 Cette commande supprime le dossier `build` du dossier `mon/site/` ainsi que le contenu du repertoire `build`.  
 **Argument** : un chemin vers un répertoire avec un site statique initialisé.
 
+## Description du layout par défaut.
+Le layout généré par la commande init contient déjà des variables, vous pouvez leur assigner une valeur grâce aux métadonnées des fichiers de contenu.
+Vous pouvez modifier le layout pour utiliser plus de variables si vous le souhaitez.
+Les variables actuellement disponibles sont:
+ - description : une description du contenu.
+ - author: l'auteur de la page.
+ - date: la date à laquelle la page a été écrite.
+ - title : le titre de la page.
+
+````html
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="{{description}}">
+     <meta name="author" content="{{author}}">
+    <meta name="date" content="{{date}}">
+    <title>{{title}}</title>
+</head>
+
+<body>
+{{>header}}
+{{{ content }}}
+{{>footer}}
+</body>
+</html>
+
+````
 # Audience
 Ce projet est destiné a être évalué dans le cadre du cours DIL (développement d'ingénierie logicielle). 
 
