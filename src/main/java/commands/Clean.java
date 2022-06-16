@@ -21,7 +21,7 @@ public class Clean implements Callable<Integer> {
     public Path site;
 
     /**
-     * cette methode execute l'action principale de la classe, ici le commande clean
+     * cette méthode exécute l'action principale de la classe, ici le commande clean
      *
      * @return
      * @throws IOException

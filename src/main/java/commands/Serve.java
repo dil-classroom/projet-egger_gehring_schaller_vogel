@@ -27,11 +27,11 @@ import utils.Watcher;
 public class Serve implements Callable<Integer> {
 
     /***
-     * roorDirectory contient le fichier ou se situe le site. Il est initialité automatiquement par picocli
+     * roorDirectory contient le fichier ou se situe le site. Il est initialisé automatiquement par picocli
      */
     @CommandLine.Parameters(
             paramLabel = "rootDirectory",
-            description = "répertoire racine root des fichier markdown")
+            description = "répertoire racine root des fichiers markdown")
     public File rootDirectory;
 
     @CommandLine.Option(names = {"-w", "--watch"})

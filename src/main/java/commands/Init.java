@@ -15,14 +15,14 @@ import picocli.CommandLine.Parameters;
 public class Init implements Callable<Integer> {
 
     /**
-     * Cette variable contient le chemin du site statique, elle est initialité automatiquement par
+     * Cette variable contient le chemin du site statique, elle est initialisée automatiquement par
      * picocli
      */
     @Parameters(paramLabel = "PATH", description = "Le chemin qui doit contenir le site")
     public String path;
 
     /**
-     * cette methode execute l'action principale de la classe, ici le commande init
+     * cette méthode exécute l'action principale de la classe, ici le commande init
      *
      * @return 0 si tout est en ordre, -1 sinon
      * @throws URISyntaxException

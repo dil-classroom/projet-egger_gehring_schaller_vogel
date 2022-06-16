@@ -97,7 +97,7 @@ public class Build implements Callable<Integer> {
     /**
      * Cette methode génère l'html à partir de contenu markdown
      *
-     * @param markdown Un string contenu le markdown
+     * @param markdown Un string contenant le markdown
      * @return le html résultant de la compilation du markdown avec flexmark
      */
     public static String genHtmlFromMarkdown(String markdown) {
